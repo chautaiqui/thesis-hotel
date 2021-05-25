@@ -2,7 +2,7 @@ import { React, useState, useEffect} from 'react';
 import { getRequest } from '../../pkg/api';
 
 import { useLocation } from 'react-router-dom';
-import { message, PageHeader, Row, Col } from 'antd';
+import { message, Row, Col } from 'antd';
 import { ImgCarousel } from '../../components/carousel'; 
 import { Booking } from '../../components/booking';
 import './hotel.style.css';
