@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Table, DatePicker} from 'antd';
+import { Table, DatePicker } from 'antd';
 import moment from 'moment';
 
 const onCell = (record, rowIndex) => {
