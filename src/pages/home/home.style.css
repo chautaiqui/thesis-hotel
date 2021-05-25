@@ -1,0 +1,30 @@
+.form-search {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 12%); */
+}
+
+.on-form {
+  /* display: flex; */
+  /* justify-content: center; */
+}
+.img-br {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.br-homepage {
+  display: flex;
+  background: url(https://res.cloudinary.com/fpt-telecom/image/upload/v1621928973/esd3wohrnzolihpovzuz.jpg);
+  height: fit-content;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 40vw;
+  justify-content: center;
+  align-items: center;
+}

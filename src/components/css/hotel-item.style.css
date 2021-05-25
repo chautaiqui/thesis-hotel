@@ -1,0 +1,21 @@
+.item {
+  width: 100%;
+}
+.img-item {
+  max-width: 100%;
+  cursor: pointer;
+}
+.name {
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.price {
+  color: red;
+  font-weight: bold;
+}
+
+.address {
+  cursor: pointer;
+  color: #5392f9;
+}
