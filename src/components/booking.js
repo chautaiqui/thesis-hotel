@@ -72,16 +72,7 @@ const dcol = [
     render: text => <div>{text}</div>,
   },
 ]
-const data = [
-  {
-    key: 'room1',
-    room: 'room1',
-  },
-  {
-    key: 'room2',
-    room: 'room2',
-  },
-]
+
 
 const baseDay = ['Sunday', 'Monday', 'Tuesday', 'Webnesday', 'Thurday', 'Friday', 'Saturday'];
 const ListDay = (week, year) => {
@@ -136,6 +127,7 @@ const getWeekYearNow = () => {
 }
 export const Booking = (props) => {
   const { hotel, room } = props;
+  console.log(hotel)
   const defCol = getWeekYearNow();
   const [ col, setCol ] = useState(defCol);
   const chooseWeek = (date, dateString) =>{
@@ -162,9 +154,9 @@ export const Booking = (props) => {
       })
     }
   }, [col,defCol])
-  const onSelect = (record, selected, selectedRows, nativeEvent) => {
-    console.log(record, selected, selectedRows, nativeEvent)
-  }
+  // const onSelect = (record, selected, selectedRows, nativeEvent) => {
+  //   console.log(record, selected, selectedRows, nativeEvent)
+  // }
   return (
     <div>
       <Table 

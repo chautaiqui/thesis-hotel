@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { Grid, Button, Drawer, Avatar } from 'antd';
 import './css/header.style.css';
-import { MenuFoldOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, LogoutOutlined } from '@ant-design/icons';
 const { useBreakpoint } = Grid;
 
 const breakPoint = (obj) => {

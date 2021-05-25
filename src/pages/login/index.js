@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import { User } from '../../pkg/reducer';
 import { useHistory } from "react-router-dom";
 import { Row, Col, Card, Form, Input, Button, message  } from 'antd';
@@ -6,7 +6,7 @@ import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import { postRequest } from '../../pkg/api';
 import './login.style.css';
 export const Login = () => {
-  const [ user, dispatchUser ] = useContext(User.context);
+  const [ dispatchUser ] = useContext(User.context);
   const history = useHistory();
 
   const onFinish = (values) => {
@@ -42,11 +42,11 @@ export const Login = () => {
           <Row>
             <Col span={12}>
               <h2>Fast Booking</h2>
-              <img src='https://cdn.adsplay.xyz/vod/2021/05/0421bbd72ecdf96591342458b0d6905d_6527.png' style={{maxWidth: '100%'}}/>
+              <img alt='simple' src='https://cdn.adsplay.xyz/vod/2021/05/0421bbd72ecdf96591342458b0d6905d_6527.png' style={{maxWidth: '100%'}}/>
             </Col>
             <Col span={12}>
               <h2>Simple Function</h2>
-              <img src='https://cdn.adsplay.xyz/vod/2021/05/d14f3aeb9d84c4f86d469957025eddd4_1480.png' style={{maxWidth: '100%'}}/>
+              <img alt='func' src='https://cdn.adsplay.xyz/vod/2021/05/d14f3aeb9d84c4f86d469957025eddd4_1480.png' style={{maxWidth: '100%'}}/>
             </Col>
           </Row>
         </Col>
@@ -100,10 +100,3 @@ export const Login = () => {
     </div>
   )
 }
-
-
-{/* <button onClick={()=> {
-        console.log('login')
-        dispatchUser({type: 'LOGIN', user: {email: 'qui', name: 'quict'}, email: 'qui', api_token: '123'})
-        history.push("/home");
-      }}>Login</button> */}

@@ -20,7 +20,7 @@ export const CustomUpload = (props) => {
   }
   React.useEffect(()=>{
 		onChange(imgs);
-	},[imgs])
+	},[imgs, onChange])
   const upload = (options) => {
 		const { file } = options;
 		setImgs([file]);
@@ -28,7 +28,6 @@ export const CustomUpload = (props) => {
 
   return (
     <Upload
-      listType="picture-card"
       name="avatar"
       listType="picture-card"
       className="avatar-uploader"
@@ -37,9 +36,9 @@ export const CustomUpload = (props) => {
       beforeUpload={beforeUpload}
     >
       {imgs.length !== 0 ? (
-        <img src={URL.createObjectURL(imgs[0])} style={{maxWidth: '100%'}}/>
+        <img src={URL.createObjectURL(imgs[0])} style={{maxWidth: '100%'}} alt="img-list"/>
       ) : (
-        <img src={fileList} style={{maxWidth: '100%'}}/>
+        <img src={fileList} style={{maxWidth: '100%'}} alt="imglist"/>
       )}
     </Upload>
   )

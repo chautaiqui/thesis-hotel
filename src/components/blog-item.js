@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { getRequest } from '../pkg/api';
+import React from 'react';
+// import { getRequest } from '../pkg/api';
 import Carousel from 'react-multi-carousel';
 import { Card } from 'antd'
 import 'react-multi-carousel/lib/styles.css';

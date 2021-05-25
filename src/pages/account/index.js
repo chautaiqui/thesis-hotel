@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { Row, Col, Avatar, Tabs, Form, Input, DatePicker, Button, Table, Modal, message } from 'antd';
+import { Row, Col, Avatar, Tabs, Form, Input, DatePicker, Button, message } from 'antd';
 import { EditText } from 'react-edit-text';
 import { User } from '../../pkg/reducer';
 import 'react-edit-text/dist/index.css';

@@ -8,7 +8,7 @@ import './home.style.css';
 import { BlogItem } from '../../components/blog-item';
 import { getRequest } from '../../pkg/api';
 import { Blogs } from '../blog/blogs';
-const urlimg = 'https://ads-cdn.fptplay.net/static/banner/2021/05/17b8065615f6c42b421f1fd4fe9c8fd4_6051.jpg';
+// const urlimg = 'https://ads-cdn.fptplay.net/static/banner/2021/05/17b8065615f6c42b421f1fd4fe9c8fd4_6051.jpg';
 
 export const Home = () => {
   // const [ user, dispatchUser ] = useContext(User.context);

@@ -86,11 +86,11 @@ export const Signup = () => {
           <Row gutter={[16,16]}>
             <Col span={12}>
               <h2>Fast Booking</h2>
-              <img src='https://cdn.adsplay.xyz/vod/2021/05/0421bbd72ecdf96591342458b0d6905d_6527.png' style={{maxWidth: '100%'}}/>
+              <img alt='fast' src='https://cdn.adsplay.xyz/vod/2021/05/0421bbd72ecdf96591342458b0d6905d_6527.png' style={{maxWidth: '100%'}}/>
             </Col>
             <Col span={12}>
               <h2>Simple Function</h2>
-              <img src='https://cdn.adsplay.xyz/vod/2021/05/d14f3aeb9d84c4f86d469957025eddd4_1480.png' style={{maxWidth: '100%'}}/>
+              <img alt="simple" src='https://cdn.adsplay.xyz/vod/2021/05/d14f3aeb9d84c4f86d469957025eddd4_1480.png' style={{maxWidth: '100%'}}/>
             </Col>
           </Row>
         </Col>

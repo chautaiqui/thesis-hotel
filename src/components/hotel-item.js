@@ -9,6 +9,7 @@ export const HotelItem = props => {
         src={img}
         className="img-item"
         onClick={redirect}
+        alt="img"
       />
       <p className="name" onClick={redirect}>{name}</p>
       <p className="address" onClick={redirect}>{address}</p>
