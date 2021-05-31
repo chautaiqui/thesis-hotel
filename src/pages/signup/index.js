@@ -75,14 +75,6 @@ export const Signup = () => {
   };
   return (
     <div>
-      <Row
-        style={{ height: 200, background: "#3390FF", justifyContent: "center" }}
-        gutter={[16, 16]}
-      >
-        <Col style={{ lineHeight: "200px" }}>
-          <h3>Sign up for more promotions and benefits</h3>
-        </Col>
-      </Row>
       <Row gutter={[16, 16]} style={{ marginTop: 10 }}>
         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
           <Row gutter={[16, 16]}>

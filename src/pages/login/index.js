@@ -40,11 +40,13 @@ export const Login = () => {
   return (
     <div>
       <Row
-        style={{ height: 200, background: "#3390FF", justifyContent: "center" }}
+        style={{
+          height: 200,
+          justifyContent: "center",
+        }}
+        className="header-pic"
       >
-        <Col style={{ lineHeight: "200px" }}>
-          <h3>Log in for more promotions and benefits</h3>
-        </Col>
+        <Col style={{ lineHeight: "200px" }}></Col>
       </Row>
       <Row gutter={[16, 16]} style={{ marginTop: 10 }}>
         <Col xs={24} sm={24} md={12} lg={12} xl={12}>

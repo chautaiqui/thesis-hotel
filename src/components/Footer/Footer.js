@@ -56,22 +56,11 @@ const Footer = () => (
       <div className="menu">
         <h4 className="menu-title">Other Pages</h4>
 
-        <a href="#" className="other-links">
-          Contact Us
-        </a>
-
-        <a
-          href="https://www.winston.com/en/cookie-policy.html"
-          className="other-links"
-        >
+        <a href="/privacy" className="other-links">
           Privacy Policy
         </a>
 
-        <a href="#" className="other-links">
-          FAQ
-        </a>
-
-        <a href="#" className="other-links">
+        <a href="/terms" className="other-links">
           Terms of use
         </a>
       </div>
