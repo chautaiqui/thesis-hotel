@@ -219,12 +219,13 @@ export const Signup = () => {
                     width: "100%",
                   }}
                 />
+              </Form.Item>
+              <Form.Item>
                 You have a account?{" "}
                 <a href="/login">
                   <mark>Click here</mark>
                 </a>
               </Form.Item>
-
               <Form.Item {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit">
                   Register

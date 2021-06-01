@@ -83,5 +83,41 @@ const putRequest = async(fn, data, id) => {
     return { success: false, error: "Can't update"};
   }
 }
-
-export { getRequest, postRequest, putRequest }
+const putMethod = async(fn, data, id) => {
+  if(!id) {
+    return { success: false, error: 'Id not found'}
+  }
+  try {
+    var myHeaders = new Headers(); 
+    myHeaders.append('Content-Type', 'multipart/form-data; boundary=<calculated when request is sent>');
+    let url = `${apiDomain}/api/${fn}/${id}`
+    const res = await axios.put(url, data, {headers: myHeaders, validateStatus: (status) => { return (status >= 200 && status < 500) || status == 400; }})
+    // console.log(res)
+    if(res.status >=200 && res.status < 300) {
+      return { success: true, result: res.data}
+    } 
+    if(res.status >= 400) {
+      return { success: false, error: res.data.message }
+    }
+  } catch (e) {
+    return { success: false, error: ''}
+  }
+}
+const postMethod = async (fn, body) => {
+  try {
+    var myHeaders = new Headers(); 
+    myHeaders.append('Content-Type', 'multipart/form-data; boundary=<calculated when request is sent>');
+    let url = `${apiDomain}/api/${fn}`
+    const res = await axios.post(url, body, {headers: myHeaders, validateStatus: (status) => { return (status >= 200 && status < 500) || status == 400; }})
+    console.log(res)
+    if(res.status >=200 && res.status < 300) {
+      return { success: true, result: res.data}
+    } 
+    if(res.status >= 400) {
+      return { success: false, error: res.data.message }
+    }
+  } catch (e) {
+    return { success: false, error: e}
+  }
+}
+export { getRequest, postRequest, putRequest, putMethod, postMethod }

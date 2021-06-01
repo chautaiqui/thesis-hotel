@@ -16,8 +16,8 @@ export const Blogs = (props) => {
                   <img
                     alt="example"
                     src={
-                      "https://res.cloudinary.com/hotellv/image/upload/v1620922817/q84uupghxhgbau5wk542.jpg" ||
-                      blog[0].img
+                      blog[0].img || "https://res.cloudinary.com/hotellv/image/upload/v1620922817/q84uupghxhgbau5wk542.jpg"
+                      
                     }
                   />
                 }
@@ -37,8 +37,8 @@ export const Blogs = (props) => {
                       <img
                         alt="example"
                         src={
-                          "https://res.cloudinary.com/hotellv/image/upload/v1620922817/q84uupghxhgbau5wk542.jpg" ||
-                          blog[1].img
+                          blog[1].img || "https://res.cloudinary.com/hotellv/image/upload/v1620922817/q84uupghxhgbau5wk542.jpg"
+                          
                         }
                       />
                     }
@@ -56,8 +56,8 @@ export const Blogs = (props) => {
                       <img
                         alt="example"
                         src={
-                          "https://res.cloudinary.com/hotellv/image/upload/v1620922817/q84uupghxhgbau5wk542.jpg" ||
-                          blog[2].img
+                          blog[2].img || "https://res.cloudinary.com/hotellv/image/upload/v1620922817/q84uupghxhgbau5wk542.jpg"
+                          
                         }
                       />
                     }
@@ -75,8 +75,8 @@ export const Blogs = (props) => {
                       <img
                         alt="example"
                         src={
-                          "https://res.cloudinary.com/hotellv/image/upload/v1620922817/q84uupghxhgbau5wk542.jpg" ||
-                          blog[3].img
+                          blog[3].img || "https://res.cloudinary.com/hotellv/image/upload/v1620922817/q84uupghxhgbau5wk542.jpg"
+                          
                         }
                       />
                     }
@@ -94,8 +94,7 @@ export const Blogs = (props) => {
                       <img
                         alt="example"
                         src={
-                          "https://res.cloudinary.com/hotellv/image/upload/v1620922817/q84uupghxhgbau5wk542.jpg" ||
-                          blog[4].img
+                          blog[4].img ||"https://res.cloudinary.com/hotellv/image/upload/v1620922817/q84uupghxhgbau5wk542.jpg"
                         }
                       />
                     }

@@ -113,16 +113,14 @@ export const Login = () => {
                   type="password"
                   placeholder="Password"
                 />
+                
+              </Form.Item>
+              <Form.Item>
                 You don't have a account?{" "}
                 <a href="/signup">
                   <mark>Click here</mark>
                 </a>
               </Form.Item>
-              {/* <Form.Item>
-                <Form.Item name="remember" valuePropName="checked" noStyle>
-                  <Checkbox>Remember</Checkbox>
-                </Form.Item>
-              </Form.Item> */}
               <Form.Item>
                 <Button
                   type="primary"

@@ -62,8 +62,7 @@ export const BlogItem = (props) => {
               <img
                 alt="example"
                 src={
-                  "https://res.cloudinary.com/hotellv/image/upload/v1620922817/q84uupghxhgbau5wk542.jpg" ||
-                  item.img
+                  item.img || "https://res.cloudinary.com/hotellv/image/upload/v1620922817/q84uupghxhgbau5wk542.jpg"
                 }
               />
             }
