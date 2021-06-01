@@ -50,7 +50,7 @@ export const Hotel = () => {
           return (
             <Col key={index} xs={24} sm={12} md={8} lg={6} xl={6}>
               <HotelItem name={item.name} address={`${item.street}, ${item.ward}, ${item.district}, ${item.province}`} 
-              rate={5} price={item.averagePrice} img={url} redirect={()=>{hotelClick(item)}}/>
+              rate={5} price={item.averagePrice.avgValue} img={item.imgs[0]} redirect={()=>{hotelClick(item)}}/>
             </Col>
           )
         })

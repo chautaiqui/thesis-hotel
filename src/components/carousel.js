@@ -2,7 +2,7 @@ import React from "react";
 import InfiniteCarousel from "react-leaf-carousel";
 import { Carousel } from "3d-react-carousal";
 
-// import "./css/carousel.css";
+import "./css/carousel.css";
 
 const location = [
   "Ho Chi Minh",
