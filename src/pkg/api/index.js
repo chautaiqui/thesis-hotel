@@ -33,26 +33,6 @@ const getRequest = async (fn, options = {}, extend = []) => {
   }
 }
 
-// const postRequest = async (fn, body) => {
-//   try {
-//     console.log(fn, body)
-//     let _h = new Headers();
-//     _h.append('content-type', 'application/json');
-//     let url = `${apiDomain}/${fn}`
-//     let _r = await fetch(url, {
-//       method: 'POST',
-//       body: JSON.stringify(body),
-//       headers: _h
-//     });
-//     _r = await _r.json();
-//     if (_r.message) return { success: false, error: _r.message };
-//     // if (!_r.ok) return { success: false, error: 'Api error' };
-//     // if (_r.status !== 200)  return { success: false, error: _r.message || 'Api ok but smt error' };
-//     return { success: true, result: _r };
-//   } catch(e) {
-//     return { success: false, error: e };
-//   }
-// }
 const postRequest = async (fn, data) => {
   try {
     let _h = new Headers();
