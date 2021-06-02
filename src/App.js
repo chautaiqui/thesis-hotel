@@ -1,3 +1,4 @@
+import React from 'react';
 import CurrentUser from './components/currentuser';
 import RouterContainer from './pkg/router';
 import './App.css';
