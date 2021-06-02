@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { getRequest } from "../../pkg/api";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { message } from "antd";
 import { ImgCarousel } from "../../components/carousel";
 import { Booking } from "../../components/booking";
@@ -11,15 +11,13 @@ function useQuery() {
 }
 
 export const DetailHotel = (props) => {
-  const query = useQuery();
+  const {id} = useParams();
   const [hotel, setHotel] = useState({});
   const [room, setRoom] = useState([]);
 
-  console.log(query.get("id"));
-
   useEffect(() => {
     const fetchPost = async () => {
-      const re = await getRequest("hotel", {}, [query.get("id")]);
+      const re = await getRequest("hotel", {}, [id]);
       console.log(re);
       if (!re.success) {
         message.error(re.message);
@@ -31,7 +29,7 @@ export const DetailHotel = (props) => {
     if (!hotel._id) {
       fetchPost();
     }
-  }, [query]);
+  }, [id]);
 
   useEffect(() => {
     const fetchRoom = async () => {
@@ -52,7 +50,7 @@ export const DetailHotel = (props) => {
   console.log(hotel);
   return (
     <>
-      {query.get("id") ? (
+      {id ? (
         <div>
           {hotel.imgs && <ImgCarousel imgs={hotel.imgs} />}
           <div style={{ marginTop: 20 }}>

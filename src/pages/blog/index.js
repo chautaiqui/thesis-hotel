@@ -1,7 +1,7 @@
 import { React, useState, useEffect} from 'react';
 import { getRequest } from '../../pkg/api';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams, useHistory } from 'react-router-dom';
 import { message, PageHeader, Row, Col } from 'antd';
 
 
@@ -19,16 +19,67 @@ const routes = [
     breadcrumbName: 'Blog',
   },
 ];
-
+const initState = {
+  behavior: 'init',
+  data: []
+};
 export const Blog = () => {
-  const query = useQuery();
-  const [ post, setPost ] = useState({data: {}, route: ""});
-  console.log(query.get('id'), post);
+  const [ state,setState ] = useState(initState);
+  const history = useHistory();
+  const getData = async () => {
+    const res = await getRequest('blog');
+    if(res.success) {
+      setState({
+        behavior: 'stall',
+        data: res.result
+      })
+    }
+  }
+  const blogClick = (item) => {
+    history.push(`/blog/${item._id}`);
+  };
+  useEffect(()=>{
+    switch (state.behavior) {
+      case 'init':
+        getData();
+        return;
+      case 'stall':
+        return
+      default:
+        break;
+    }
+  },[state]);
+  console.log(state);
+  return (
+    <>
+      <Row gutter={[16,16]} style={{marginTop: 50}}>
+        {
+          state.data.map((item, index) => {
+            return (
+              <Col key={index} xs={24} sm={12} md={8} lg={6} xl={6}
+                onClick={()=>{
+                  blogClick(item)
+                }}
+              >
+                <img src={item.img} alt='blog' style={{maxWidth: '100%'}}/>
+                <p style={{textAlign: 'center', fontWeight: 500}}>{item.title}</p>
+              </Col>
+            )
+          })
+        }
+      </Row>
+    </>
+  )
+}
 
+
+export const BlogItem = () => {
+  const {id} = useParams();
+  const [ post, setPost ] = useState({data: {}, route: ""});
+  
   useEffect(()=>{
     const fetchPost = async () => {
-      const re = await getRequest('blog', {}, [query.get('id')]);
-      console.log(re);
+      const re = await getRequest('blog', {}, [id]);
       if(!re.success) {
         message.error(re.message)
       }
@@ -40,7 +91,7 @@ export const Blog = () => {
     if(!post._id) {
       fetchPost();
     }
-  },[query])
+  },[id])
 
   return (
     <>
@@ -52,7 +103,7 @@ export const Blog = () => {
       />
       <Row>
         <Col span={20} offset={2}>
-          <p>{post.content}</p>
+          <p style={{textAlign: 'justify'}}>{post.content}</p>
           <img src={post.img} alt="img-post" style={{maxWidth: "100%"}}/>
         </Col>
       </Row>

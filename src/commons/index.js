@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, message } from 'antd';
+import { Upload, message, notification } from 'antd';
 // import { PlusOutlined } from '@ant-design/icons';
 
 
@@ -42,4 +42,46 @@ export const CustomUpload = (props) => {
       )}
     </Upload>
   )
+}
+
+export const messageError = (title,msg) => {
+  if (msg) {
+    let content;
+    switch (typeof msg) {
+      case 'string': 
+        content = msg;
+        break;
+      case 'object':
+        content = (
+        <div>
+          {
+          Object.keys(msg).map((key, index) => (
+            <div key={index}>
+            - {key}: {msg[key]}
+            </div>
+          ))
+          }
+        </div>
+        );
+        break;
+      default:
+        content = JSON.stringify(msg)
+        break;
+    }
+    return notification.error({
+      message: title,
+      description: content,
+      duration: 5
+    })
+  }
+    
+  return message.error('Something wrong happened.');
+}
+  
+export const messageSuccess = (msg, content) => {
+  return notification.success({
+    message: msg || 'Action successfully!',
+    description: content,
+    duration: 5
+  });
 }

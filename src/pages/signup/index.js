@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Card, Form, Input, DatePicker, Button, message } from "antd";
 import { useHistory } from "react-router-dom";
-import { postRequest } from "../../pkg/api";
+import { postMethod } from "../../pkg/api";
 
 const formItemLayout = {
   labelCol: {
@@ -51,7 +51,7 @@ export const Signup = () => {
       message.error("Phone error!");
       return;
     }
-    console.log(values);
+    
     const data = {
       email: email,
       password: password,
@@ -60,15 +60,16 @@ export const Signup = () => {
       phone: phone,
       address: address,
     };
+    console.log(data);
     const createUser = async () => {
-      const res = await postRequest("customer/signup", data);
-      console.log(res);
+      const res = await postMethod("customer/signup", data);
       if (res.success) {
         message.success("Create account sucessfully!");
         console.log(res);
         history.push("/login");
       } else {
         message.error(res.error);
+        return;
       }
     };
     createUser();

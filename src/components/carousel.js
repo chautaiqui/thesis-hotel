@@ -5,14 +5,14 @@ import { Carousel } from "3d-react-carousal";
 import "./css/carousel.css";
 
 const location = [
-  "Ho Chi Minh",
-  "Ha Noi",
-  "Vung Tau",
-  "Nha Trang",
-  "Vung Tau",
-  "Phu Quoc",
-  "Da Nang",
-  "Hoi An",
+  {name: "Ho Chi Minh", src:"https://ads-cdn.fptplay.net/static/banner/2021/06/449b4879f77b63066602ec54c57e4c31_2299.png"},
+  {name: "Da Lat", src: "https://ads-cdn.fptplay.net/static/banner/2021/06/53771383b5063a918d1c865d377cfa30_686.png"},
+  {name: "Ha Noi", src: "https://ads-cdn.fptplay.net/static/banner/2021/06/4187c4575f19a0b34cb6358c5590a449_4657.png"},
+  {name: "Vung Tau", src: "https://ads-cdn.fptplay.net/static/banner/2021/06/d656c4bb699d21329842d78137d5d0b5_8126.png"},
+  {name: "Nha Trang", src: "https://ads-cdn.fptplay.net/static/banner/2021/06/0f50d971b765f6506fe4c1656cdce104_8159.png"},
+  {name: "Phu Quoc", src: "https://ads-cdn.fptplay.net/static/banner/2021/06/0f50d971b765f6506fe4c1656cdce104_8159.png"},
+  {name: "Da Nang", src: "https://ads-cdn.fptplay.net/static/banner/2021/06/749a11b415428a5266bee41c9884e575_6950.png"},
+  {name: "Hoi An", src: "https://ads-cdn.fptplay.net/static/banner/2021/06/b709110fd348bafbfdb4b672cf8fdb83_8791.png",}
 ];
 const url =
   "https://ads-cdn.fptplay.net/static/banner/2021/05/238022d83feb880f42fd0dcf9c1a96ca_7780.png";
@@ -62,29 +62,30 @@ export const CarouselCus = (props) => {
               className="carousel-explore"
               key={index}
               onClick={() => {
-                handleClick(item);
+                handleClick(item.name);
               }}
               style={{ cursor: "pointer" }}
             >
               <img
-                src={url}
+                src={item.src}
                 alt="hinh"
                 style={{
-                  width: "200px",
+                  maxWidth: "350px",
                   height: "200px",
                   borderRadius: "5px",
                 }}
               />
               <br />
-              <span
+              <p
                 style={{
-                  padding: "0 0 0 60px",
-                  fontSize: "15px",
+                  // padding: "0 0 0 60px",
+                  // fontSize: "15px",
                   fontWeight: 500,
+                  textAlign: 'center'
                 }}
               >
-                {item}
-              </span>
+                {item.name}
+              </p>
             </div>
           );
         })}

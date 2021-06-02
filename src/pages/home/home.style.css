@@ -29,3 +29,9 @@
   align-items: center;
   border-radius: 5px;
 }
+.view-more-blog {
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 600;
+  color: #081D8D !important;
+}

@@ -38,8 +38,7 @@ export const Hotel = () => {
     // const numArray = numArray.sort((a, b) => a - b);
   }, [sort]);
   const hotelClick = (item) => {
-    console.log(item);
-    history.push(`/hotel/detail?id=${item._id}`);
+    history.push(`/hotel/${item._id}`);
   };
   console.log(lstHotel);
   return (

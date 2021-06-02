@@ -7,10 +7,11 @@ import { routerPages } from "../../pages";
 import { Home } from "../../pages/home";
 import { Hotel } from "../../pages/hotel";
 import { DetailHotel } from "../../pages/hotel/detail";
-import { Blog } from "../../pages/blog";
+import { Blog, BlogItem } from "../../pages/blog";
 import { postRequest } from "../api";
 import { Term } from "../../pages/term";
 import { Privacy } from "../../pages/privacy";
+import { Voucher } from "../../pages/voucher";
 
 const RouterContainer = (props) => {
   const [_user, dispatchUser] = useContext(User.context);
@@ -22,6 +23,7 @@ const RouterContainer = (props) => {
   useEffect(() => {
     const { email, api_token } = localStorage;
     const checkUser = async () => {
+      console.log('chcek')
       try {
         const res = await postRequest("customer/login", {
           email: email,
@@ -44,11 +46,11 @@ const RouterContainer = (props) => {
         setCheck(true);
       }
     };
+    console.log('local storage', check, email, api_token)
     if (!check) {
       if (email && api_token) {
-        return () => {
-          checkUser();
-        };
+        console.log('call check')
+        checkUser();
       } else setCheck(true);
     }
   }, [check]);
@@ -66,11 +68,17 @@ const RouterContainer = (props) => {
           <Route exact path="/hotel">
             <Hotel />
           </Route>
-          <Route exact path="/hotel/detail">
+          <Route exact path="/hotel/:id">
             <DetailHotel />
           </Route>
           <Route exact path="/blog">
             <Blog />
+          </Route>
+          <Route exact path="/blog/:id">
+            <BlogItem />
+          </Route>
+          <Route exact path="/voucher">
+            <Voucher />
           </Route>
           <Route exact path="/terms">
             <Term />
@@ -78,12 +86,9 @@ const RouterContainer = (props) => {
           <Route exact path="/privacy">
             <Privacy />
           </Route>
-
-          {/* {routerPages.filter(p =>_user.permissions.indexOf(p.permissions) > -1).map(p => ( */}
           {routerPages
             .filter((p) => p.isLogin === isLogin)
             .map((p) => (
-              // <Route path={`${p.path}/:param`} key={`${p.path}/:param`}>
               <Route path={p.path} key={p.path}>
                 <p.component />
               </Route>

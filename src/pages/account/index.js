@@ -1,13 +1,13 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Row, Col, Avatar, Tabs, Form, Input, DatePicker, Button, message } from 'antd';
 import { EditText } from 'react-edit-text';
 import { User } from '../../pkg/reducer';
 import 'react-edit-text/dist/index.css';
 import moment from 'moment';
 import './account.style.css';
-import { postRequest, putRequest } from '../../pkg/api';
+import { postMethod, putMethod } from '../../pkg/api';
 import { CustomUpload } from '../../commons';
-
+import { VoucherItem } from '../voucher';
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -41,6 +41,7 @@ const tailFormItemLayout = {
 
 export const Account = () => {
   const [ user ] = useContext(User.context);
+  const [loading, setLoading] = useState(false);
   const [ form ] = Form.useForm();
   const [ form_pass ] = Form.useForm();
 
@@ -73,30 +74,31 @@ export const Account = () => {
     if(values.img.length !== 0) {
       fd.append('img', values.img[0])
     }
+    setLoading(true);
     const updateInfo = async () => {
-      const res = await putRequest('customer', fd, user._id);
+      const res = await putMethod('customer', fd, user._id);
       if(res.success) {
         message.success('Updated infomation successfully!');
-        window.location.reload();
+        form.setFieldsValue(res.result);
+        setLoading(false);
+        return;
       } else {
         message.error(res.error);
+        setLoading(false)
+        return;
       }
     }
     updateInfo();
   }
   const changePassword = values => {
     const validate = async () => {
-      const res = await postRequest('customer/login',{email:user.email, password: values.current_password});
+      setLoading(true);
+      const res = await postMethod('customer/login',{email:user.email, password: values.current_password});
       if(!res.success) {
         message.error("Password error!");
         return;
       }
       var data = {
-        email: user.email,
-        birthday: moment(user.birthday).format( 'DD-MM-YYYY', 'DD/MM/YYYY' ),
-        name: user.name,
-        phone: user.phone,
-        address: user.address,
         password: values.new_password
       }
       var fd = new FormData();
@@ -105,12 +107,17 @@ export const Account = () => {
           fd.append(key, value)
         }
       }
-      const res1 = await putRequest('customer', fd, user._id);
+      const res1 = await putMethod('customer', fd, user._id);
       if(res1.success) {
         message.success('Change password successfully!');
         localStorage.setItem('api_token', values.new_password);
+        setLoading(false);
+        form_pass.resetFields();
+        return;
       } else {
         message.error(res1.error);
+        setLoading(false);
+        return;
       }
     }
     validate();
@@ -167,7 +174,7 @@ export const Account = () => {
                   <CustomUpload fileList={user.img}/>
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
-                  <Button type="primary" htmlType="submit">
+                  <Button type="primary" htmlType="submit" shape="round" loading={loading}>
                     Update
                   </Button>
                 </Form.Item>
@@ -190,7 +197,7 @@ export const Account = () => {
                       span: 24,
                     },
                     sm: {
-                      span: 16,
+                      span: 10,
                     },
                   },
                 }}
@@ -242,7 +249,7 @@ export const Account = () => {
                   <Input.Password />
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
-                  <Button type="primary" htmlType="submit">
+                  <Button type="primary" htmlType="submit" shape={'round'} loading={loading}>
                     Change
                   </Button>
                 </Form.Item>
@@ -250,6 +257,19 @@ export const Account = () => {
             </Tabs.TabPane>
             <Tabs.TabPane tab="History" key="3">
               History
+            </Tabs.TabPane>
+            <Tabs.TabPane tab="Voucher" key="4">
+              <Row gutter={[16,16]}>
+                {
+                  user.voucher.map((item, index) => {
+                    return (
+                      <Col key={index} xs={24} sm={12} md={12} lg={12} xl={12}>
+                        <VoucherItem hotel={item.hotel.name} view={true} voucher={item} discount={item.discount} roomType={item.roomType.name} endDate={moment(item.endDate).format('DD-MM-YYYY')}/>
+                      </Col>
+                    )
+                  })
+                }
+              </Row>
             </Tabs.TabPane>
         </Tabs>
         </Col>

@@ -3,10 +3,10 @@ import { User } from "../../pkg/reducer";
 import { useHistory } from "react-router-dom";
 import { Row, Col, Card, Form, Input, Button, message } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
-import { postRequest } from "../../pkg/api";
+import { postMethod } from "../../pkg/api";
 import "./login.style.css";
 export const Login = () => {
-  const [dispatchUser] = useContext(User.context);
+  const [_user, dispatchUser] = useContext(User.context);
   const history = useHistory();
 
   const onFinish = (values) => {
@@ -17,12 +17,13 @@ export const Login = () => {
       return;
     }
     const fetchUser = async () => {
-      const res = await postRequest("customer/login", {
+      const res = await postMethod("customer/login", {
         email: values.email,
         password: values.password,
       });
       if (res.success) {
         message.success("Loading!");
+        console.log(res);
         dispatchUser({
           type: "LOGIN",
           user: res.result.customer,
@@ -30,9 +31,10 @@ export const Login = () => {
           api_token: values.password,
         });
         history.replace("/");
-        // window.location.reload();
+        window.location.reload();
       } else {
         message.error(res.error);
+        return;
       }
     };
     fetchUser();

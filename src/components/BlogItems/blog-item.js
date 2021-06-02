@@ -59,7 +59,7 @@ export const BlogItem = (props) => {
               className="main-img"
               src={item.img}
               alt="hinh"
-              onClick={() => search(`/blog?id=${item._id}`)}
+              onClick={() => search(`/blog/${item._id}`)}
             />
             <p className="blog-title">{item.title}</p>
             <p className="blog-content">{item.content}</p>

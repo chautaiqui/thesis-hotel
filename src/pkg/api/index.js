@@ -90,7 +90,7 @@ const putMethod = async(fn, data, id) => {
   try {
     var myHeaders = new Headers(); 
     myHeaders.append('Content-Type', 'multipart/form-data; boundary=<calculated when request is sent>');
-    let url = `${apiDomain}/api/${fn}/${id}`
+    let url = `${apiDomain}/${fn}/${id}`
     const res = await axios.put(url, data, {headers: myHeaders, validateStatus: (status) => { return (status >= 200 && status < 500) || status == 400; }})
     // console.log(res)
     if(res.status >=200 && res.status < 300) {
@@ -107,8 +107,8 @@ const postMethod = async (fn, body) => {
   try {
     var myHeaders = new Headers(); 
     myHeaders.append('Content-Type', 'multipart/form-data; boundary=<calculated when request is sent>');
-    let url = `${apiDomain}/api/${fn}`
-    const res = await axios.post(url, body, {headers: myHeaders, validateStatus: (status) => { return (status >= 200 && status < 500) || status == 400; }})
+    let url = `${apiDomain}/${fn}`
+    const res = await axios.post(url, body, {headers: myHeaders, validateStatus: (status) => { return (status >= 200 && status < 503) || status == 400; }})
     console.log(res)
     if(res.status >=200 && res.status < 300) {
       return { success: true, result: res.data}
