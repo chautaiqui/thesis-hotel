@@ -2,12 +2,6 @@ import React, { useContext } from "react";
 import { User } from "../pkg/reducer";
 import { Headers } from "../components/header";
 import { Layout, Row, Col } from "antd";
-import {
-  FacebookOutlined,
-  SkypeOutlined,
-  LinkedinOutlined,
-  PhoneOutlined,
-} from "@ant-design/icons";
 import Footer from "../components/Footer/Footer";
 
 const { Content } = Layout;

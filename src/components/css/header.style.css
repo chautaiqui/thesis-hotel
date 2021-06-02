@@ -15,14 +15,13 @@ nav {
 
 .button-login {
   border-radius: 20px;
-  background-color: #1890ff;
-  color: #ffffff;
   font-size: 12px;
   font-weight: bold;
   padding: 8px 30px;
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
+  border: 1px solid #1890ff;
 }
 
 .div-svg {
@@ -36,7 +35,7 @@ nav {
   cursor: pointer;
 }
 .active {
-  border-bottom: 2px solid firebrick;
+  border: 1px solid firebrick;
 }
 
 a {

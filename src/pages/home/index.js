@@ -5,7 +5,7 @@ import { CarouselCus } from "../../components/carousel";
 import { Form, Input, Button, Row, Col, Divider } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import "./home.style.css";
-import { BlogItem } from "../../components/blog-item";
+import { BlogItem } from "../../components/BlogItems/blog-item";
 import { getRequest } from "../../pkg/api";
 import { Blogs } from "../blog/blogs";
 // const urlimg = 'https://ads-cdn.fptplay.net/static/banner/2021/05/17b8065615f6c42b421f1fd4fe9c8fd4_6051.jpg';
@@ -50,7 +50,7 @@ export const Home = () => {
   return (
     <div>
       <Divider orientation="left" plain>
-        <h1>Welcome to Hotel</h1>
+        <h1>Where will you travel next?</h1>
       </Divider>
       <div className="br-homepage">
         <div className="on-form">
@@ -99,11 +99,11 @@ export const Home = () => {
         {/* <img src={urlimg} alt='br' className="img-br"/> */}
       </div>
       <Divider orientation="left" plain>
-        <h1>Explore</h1>
+        <h1>Browse by location</h1>
       </Divider>
       <CarouselCus search={search} />
       <Divider orientation="left" plain>
-        <h1>Blog</h1>
+        <h1>Get inspiration for your next trip</h1>
       </Divider>
       <BlogItem blog={data.blog} search={search} />
       <Blogs blog={data.blog} search={search} />

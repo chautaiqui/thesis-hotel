@@ -53,7 +53,7 @@ export const CarouselCus = (props) => {
         sidesOpacity={0.5}
         sideSize={0.1}
         slidesToScroll={4}
-        slidesToShow={4}
+        slidesToShow={6}
         scrollOnDevice={true}
       >
         {location.map((item, index) => {
@@ -72,6 +72,7 @@ export const CarouselCus = (props) => {
                 style={{
                   width: "200px",
                   height: "200px",
+                  borderRadius: "5px",
                 }}
               />
               <br />
