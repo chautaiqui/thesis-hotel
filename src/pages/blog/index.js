@@ -1,4 +1,4 @@
-import { React, useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { getRequest } from '../../pkg/api';
 
 import { useLocation, useParams, useHistory } from 'react-router-dom';
