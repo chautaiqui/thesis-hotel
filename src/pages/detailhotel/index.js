@@ -5,7 +5,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { message } from "antd";
 import { ImgCarousel } from "../../components/carousel";
 import { Booking } from "../../components/booking";
-import "./hotel.style.css";
+import "./detailhotel.style.css";
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }

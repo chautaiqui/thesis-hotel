@@ -3,6 +3,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import { User } from '../../pkg/reducer';
 import { getRequest, postMethod } from '../../pkg/api';
 import { messageError, messageSuccess } from "../../commons";
+import { VoucherItem } from '../../components/voucher-item';
 import { Row, Col } from 'antd';
 import './voucher.style.css';
 
@@ -82,23 +83,4 @@ export const VoucherHome = (props) => {
     }
   </Row>
   )
-}
-
-export const VoucherItem = props => {
-  const { hotel, discount, roomType, endDate, getVoucher=()=>{}, voucher, view = false } = props;
-  return <>
-  <div className="coupon">
-    <div className="container-voucher">
-      <h3>{hotel}</h3>
-    </div>
-    <div className="container-voucher" style={{backgroundColor:"white"}}>
-      <h2><b>{discount}% OFF YOUR PURCHASE</b></h2> 
-    </div>
-    <div className="container-voucher">
-      <p>Use For Room Type: <span className="promo">{roomType}</span></p>
-      <p className="expire">Expires: {endDate}</p>
-      <p className="expire">Status: {voucher.docStatus}</p>
-      {!view && (<button className='btn' onClick={()=>{getVoucher(voucher)}}>Get voucher</button>)}
-    </div>
-  </div></>
 }

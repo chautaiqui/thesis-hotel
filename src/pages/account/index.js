@@ -7,7 +7,7 @@ import moment from 'moment';
 import './account.style.css';
 import { postMethod, putMethod } from '../../pkg/api';
 import { CustomUpload } from '../../commons';
-import { VoucherItem } from '../voucher';
+import { VoucherItem } from '../../components/voucher-item';
 const formItemLayout = {
   labelCol: {
     xs: {
