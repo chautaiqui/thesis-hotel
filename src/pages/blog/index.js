@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import { getRequest } from '../../pkg/api';
+import React, { useState, useEffect } from "react";
+import { getRequest } from "../../pkg/api";
 
-import { useLocation, useHistory } from 'react-router-dom';
-import { Row, Col } from 'antd';
+import { useLocation, useParams, useHistory } from "react-router-dom";
+import { message, PageHeader, Row, Col } from "antd";
+
 
 
 function useQuery() {
@@ -12,11 +13,11 @@ function useQuery() {
 const routes = [
   {
     // path: 'index',
-    breadcrumbName: 'Home',
+    breadcrumbName: "Home",
   },
   {
     // path: 'first',
-    breadcrumbName: 'Blog',
+    breadcrumbName: "Blog",
   },
 ];
 const initState = {
