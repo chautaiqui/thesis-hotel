@@ -1,7 +1,7 @@
 .carousel-blog {
-  height: 280px;
   padding-left: 40px;
   overflow: hidden;
+
   .blog-img {
     .main-img {
       width: 320px;
@@ -17,7 +17,6 @@
       transition: all 0.4s; /* Animation */
       background-position: 50% 50%;
     }
-
     .main-img:hover {
       opacity: 1;
       -ms-transform: scale(1.125); /* IE 9 */
@@ -35,14 +34,14 @@
       word-wrap: break-word; /* IE 5.5-7 */
       white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
       white-space: pre-wrap;
-      width: 362px;
+      width: 270px;
       line-height: 20px;
       margin-bottom: 15px;
     }
     .blog-content {
       position: absolute;
       bottom: 0;
-      width: 270;
+      width: 300px;
       color: #ffffff;
       font-size: 14px;
       display: inline-block;

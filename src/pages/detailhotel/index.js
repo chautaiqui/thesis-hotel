@@ -6,9 +6,6 @@ import { message } from "antd";
 import { ImgCarousel } from "../../components/carousel";
 import { Booking } from "../../components/booking";
 import "./detailhotel.style.css";
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
 
 export const DetailHotel = (props) => {
   const {id} = useParams();
