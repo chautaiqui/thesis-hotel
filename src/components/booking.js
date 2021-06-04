@@ -195,9 +195,6 @@ export const Booking = (props) => {
       });
     }
   }, [choose]);
-  // const onSelect = (record, selected, selectedRows, nativeEvent) => {
-  //   console.log(record, selected, selectedRows, nativeEvent)
-  // }
 
   const onCell = (record, rowIndex) => {
     return {
@@ -273,38 +270,21 @@ export const Booking = (props) => {
             });
           }
         });
-
-        // if( event.target.tagName === 'TD') {
-        //   if(event.target.firstElementChild.innerText === 'Booking') return
-        //   event.target.parentNode.parentNode.childNodes.forEach(item => {
-        //     item.childNodes.forEach(i => {
-        //         if(i.style.background === 'rgb(127, 255, 0)' && i !== event.target) {
-        //           i.style.background = ''
-        //         }
-        //     })
-        //   }) // check if selected to remove
-        //   event.target.style.background = '#7fff00';
-        //   var idx = Array.prototype.slice.call(event.target.parentNode.childNodes).findIndex(item => item === event.target);
-        //   var thead = document.querySelector("#tablebooking thead tr");
-        //   var d = thead.childNodes[idx].innerText;
-        //   setChoose({room: record.room, day: d});
-        // } else {
-        //   if(event.target.innerText === 'Booking') return
-        //   event.target.parentNode.parentNode.parentNode.childNodes.forEach(item => {
-        //     item.childNodes.forEach(i => {
-        //         if(i.style.background === 'rgb(127, 255, 0)' && i !== event.target) {
-        //           i.style.background = ''
-        //         }
-        //     })
-        //   }) // check if selected to remove
-        //   event.target.parentNode.style.background = '#7fff00';
-        // }
       },
     };
   };
   console.log(choose);
   return (
     <div>
+      <h3
+        style={{
+          fontWeight: "bolder",
+          textAlign: "start",
+          marginTop: 10,
+        }}
+      >
+        Booking
+      </h3>
       <Table
         id="tablebooking"
         bordered
