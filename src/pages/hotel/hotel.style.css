@@ -1,12 +1,4 @@
-.detail-decr {
+.hotel-filter {
   display: flex;
-  flex-direction: row;
-  align-content: center;
-  height: 24px;
-}
-
-.view-map {
-  margin-left: 20px;
-  cursor: pointer;
-  color: dodgerblue;
+  justify-content: flex-end;
 }

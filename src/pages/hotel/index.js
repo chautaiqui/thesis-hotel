@@ -4,7 +4,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import { getRequest } from "../../pkg/api";
 import { Row, Col, Pagination } from "antd";
 import { HotelItem } from "../../components/hotel-item";
-
+import './hotel.style.css';
 // const url =
 // "https://res.cloudinary.com/hotellv/image/upload/v1621233855/tmsvnhfbf7vcmks132jy.jpg";
 export const Hotel = () => {
@@ -19,13 +19,11 @@ export const Hotel = () => {
       {}
     );
   const [query, setQuery] = useState(param);
-  const [sort, setSort] = useState("high");
 
   useEffect(() => {
-    console.log(param);
+    console.log(query);
     const getHotel = async () => {
-      const res = await getRequest("hotel");
-      console.log(res);
+      const res = await getRequest("hotel", query);
       if (res.success) {
         setLstHotel(res.result.hotels);
       } else {
@@ -34,24 +32,26 @@ export const Hotel = () => {
     };
     getHotel();
   }, [query]);
-  useEffect(() => {
-    // const numArray = numArray.sort((a, b) => a - b);
-  }, [sort]);
   const hotelClick = (item) => {
     history.push(`/hotel/${item._id}`);
   };
   console.log(lstHotel);
   return (
     <>
-      <Select
-        placeholder="Sort"
-        options={[
-          { label: "Price: Low to High", value: "low" },
-          { label: "Price: High to Low", value: "high" },
-        ]}
-        onChange={(v) => setSort(v)}
-        style={{ width: "25%" }}
-      />
+      <div className="hotel-filter">
+        <Select
+          placeholder="Sort"
+          options={[
+            { label: "Price: Low to High", value: "asc" },
+            { label: "Price: High to Low", value: "desc" },
+          ]}
+          onChange={(v) => {
+            console.log(v); // asc tang, desc giam
+            setQuery({...query, averagePrice: v})
+          }}
+          style={{ width: "25%" }}
+        />
+      </div>
       <Row gutter={[16, 16]} style={{ marginTop: 50 }}>
         {lstHotel.map((item, index) => {
           return (

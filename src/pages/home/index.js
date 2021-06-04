@@ -21,16 +21,16 @@ export const Home = () => {
   const [data, setData] = useState({ blog: [], voucher: [] });
   const onFinish = (values) => {
     console.log(values);
-    if (values.location && values.guest) {
-      search(`/hotel?province=${values.location}&guest=${values.guest}`);
+    if (values.location && values.capacity) {
+      search(`/hotel?province=${values.location}&capacity=${values.capacity}`);
       return;
     }
     if (values.location) {
       search(`/hotel?province=${values.location}`);
       return;
     }
-    if (values.guest) {
-      search(`/hotel?guest=${values.guest}`);
+    if (values.capacity) {
+      search(`/hotel?capacity=${values.capacity}`);
       return;
     }
   };
@@ -90,8 +90,8 @@ export const Home = () => {
                 </Form.Item>
               </Col>
               <Col xs={24} sm={24} md={6} lg={6} xl={6}>
-                <Form.Item label="Guest" name="guest">
-                  <Input placeholder="Guest" />
+                <Form.Item label="Capacity" name="capacity">
+                  <Input placeholder="Capacity" />
                 </Form.Item>
               </Col>
               <Col xs={24} sm={24} md={8} lg={8} xl={8}
