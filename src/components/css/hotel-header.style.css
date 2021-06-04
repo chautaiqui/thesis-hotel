@@ -1,0 +1,18 @@
+.hotel-header-star {
+  max-width: 20px;
+  margin: 0px 10px 0px 0px;
+}
+.hotel-header-img-ele-left {
+  width: 100%;
+}
+.hotel-header-detail {
+  display: flex;
+  justify-content: flex-end;
+}
+.draw-detail-img {
+  padding: 25px 50px 50px 50px;
+}
+.hotel-header-back {
+  max-width: 40px;
+  cursor: pointer;
+}

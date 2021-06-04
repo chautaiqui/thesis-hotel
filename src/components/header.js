@@ -39,7 +39,8 @@ export const Headers = (props) => {
         <div className="div-svg" onClick={() => history.push("/")}>
           <img
             style={{ height: "50px", width: "50px" }}
-            src={Logo}
+            // src={Logo}
+            src={'https://ads-cdn.fptplay.net/static/banner/2021/06/96d6f2e7e1f705ab5e59c84a6dc009b2_3013.png'}
             alt="logo"
           />
         </div>
