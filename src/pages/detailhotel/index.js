@@ -56,18 +56,21 @@ export const DetailHotel = (props) => {
           <div style={{ marginTop: 20 }}>
             <h1 style={{ fontWeight: "bolder" }}>{hotel.name}</h1>
             <div className="detail-decr">
-              <img
-                src="https://res.cloudinary.com/fpt-telecom/image/upload/v1621972432/ife6wabz6l5jrzqoagby.png"
-                alt="lct"
-              />
-              <p>{`${hotel.street} ${hotel.ward} ${hotel.district} ${hotel.province}`}</p>
-              <a
-                href={`https://www.google.com/maps/search/?api=1&query=${hotel.street}+${hotel.ward}+${hotel.district}`}
-                className="view-map"
-                target="_blank"
-              >
-                <mark>View map</mark>
-              </a>
+              <p>
+                <img
+                  src="https://res.cloudinary.com/fpt-telecom/image/upload/v1621972432/ife6wabz6l5jrzqoagby.png"
+                  alt="lct"
+                  style={{ height: "24px" }}
+
+                />
+                {`${hotel.street} ${hotel.ward} ${hotel.district} ${hotel.province}`}
+              </p>
+              <iframe
+                loading="lazy"
+                allowfullscreen
+                style={{ height: "300px", width: "100%" }}
+                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDw1VghHA44aPt_JcYB7ac29AKDJja1OgM&q=${hotel.street},${hotel.ward}+${hotel.district}+${hotel.province}`}
+              ></iframe>
             </div>
             <div>
               <h3

@@ -1,8 +1,7 @@
 .detail-decr {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-content: center;
-  height: 24px;
 }
 
 .view-map {

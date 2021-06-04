@@ -18,7 +18,7 @@ export const BlogItem = (props) => {
       className=""
       containerClass="container"
       dotListClass={false}
-      draggable
+      draggable={false}
       focusOnSelect={false}
       infinite
       keyBoardControl
@@ -46,7 +46,7 @@ export const BlogItem = (props) => {
           paritialVisibilityGutter: 40,
         },
       }}
-      showDots={true}
+      showDots={false}
       sliderClass=""
       slidesToSlide={1}
       swipeable
