@@ -4,7 +4,7 @@ import { User } from "../../pkg/reducer";
 import { getRequest, postMethod } from "../../pkg/api";
 import { messageError, messageSuccess } from "../../commons";
 import { VoucherItem } from "../../components/voucher-item";
-import { Row, Col, Carousel } from "antd";
+import { Row, Col } from "antd";
 
 import "./voucher.style.css";
 
@@ -85,13 +85,12 @@ export const Voucher = () => {
 export const VoucherList = (props) => {
   const { data = [] } = props;
   const list = data.splice(0, 2).map((item, index) => (
-    <Col span={12}>
+    <Col xs={24} sm={12}>
       <a href="/voucher">
         <img
           style={{
-            width: "750px",
-            height: "300px",
-            margin: "10px",
+            width: "100%",
+            // height: "300px",
             borderRadius: "10px",
           }}
           src={item.img}
@@ -101,5 +100,5 @@ export const VoucherList = (props) => {
       </a>
     </Col>
   ));
-  return <Row>{list}</Row>;
+  return <Row gutter={[16,16]}>{list}</Row>;
 };

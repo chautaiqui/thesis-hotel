@@ -130,9 +130,11 @@ export const Home = () => {
       <Divider orientation="left" plain>
         <h1>Voucher</h1>
       </Divider>
-      <a href="/voucher" className="view-more-blog" target="_blank">
-        View more
-      </a>
+      <div>
+        <a href="/voucher" className="view-more-blog" target="_blank">
+          View more
+        </a>
+      </div>
       <VoucherList
         data={data.voucher}
         style={{ width: "100%", height: "230px" }}
