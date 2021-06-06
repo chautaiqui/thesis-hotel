@@ -1,21 +1,51 @@
-import React from 'react';
-import './css/voucher.style.css';
+import React from "react";
+import { Button } from "antd";
+import { WalletOutlined } from "@ant-design/icons";
 
-export const VoucherItem = props => {
-  const { hotel, discount, roomType, endDate, getVoucher=()=>{}, voucher, view = false } = props;
-  return <>
-  <div className="coupon">
-    <div className="container-voucher">
-      <h3>{hotel}</h3>
-    </div>
-    <div className="container-voucher" style={{backgroundColor:"white"}}>
-      <h2><b>{discount}% OFF YOUR PURCHASE</b></h2> 
-    </div>
-    <div className="container-voucher">
-      <p>Use For Room Type: <span className="promo">{roomType}</span></p>
-      <p className="expire">Expires: {endDate}</p>
-      <p className="expire">Status: {voucher.docStatus}</p>
-      {!view && (<button className='btn' onClick={()=>{getVoucher(voucher)}}>Get voucher</button>)}
-    </div>
-  </div></>
-}
+import "./css/voucher.style.scss";
+
+export const VoucherItem = (props) => {
+  const {
+    hotel,
+    discount,
+    roomType,
+    img,
+    endDate,
+    getVoucher = () => {},
+    voucher,
+    view = false,
+  } = props;
+  return (
+    <>
+      <div className="voucher-item">
+        <div className="voucher-img">
+          <img src={voucher.img} alt="hinh" />
+        </div>
+        <div className="voucher-body">
+          <h3>{hotel}</h3>
+
+          <b className="discount">{discount}% OFF YOUR PURCHASE</b>
+
+          <div className="voucher-promotion">
+            <p>
+              Use For Room Type: <span className="promo">{roomType}</span>
+            </p>
+            <p className="expire">Expires: {endDate}</p>
+            <p className="expire">Status: {voucher.docStatus}</p>
+          </div>
+        </div>
+        <div className="voucher-get-btn">
+          {!view && (
+            <Button
+              onClick={() => getVoucher(voucher)}
+              type="primary"
+              icon={<WalletOutlined />}
+            >
+              Get Voucher
+            </Button>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
