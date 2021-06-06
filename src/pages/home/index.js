@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { User } from '../../pkg/reducer';
+import { User } from "../../pkg/reducer";
 import { useHistory } from "react-router-dom";
 import { CarouselCus } from "../../components/carousel";
 import { Form, Input, Button, Row, Col, Divider, message } from "antd";
@@ -8,12 +8,13 @@ import "./home.style.css";
 import { BlogItem } from "../../components/BlogItems/blog-item";
 import { getRequest, postMethod } from "../../pkg/api";
 // import { Blogs } from "../blog/blogs";
-import { VoucherHome } from "../voucher";
+import { VoucherList } from "../voucher";
 import { messageError, messageSuccess } from "../../commons";
+
 // const urlimg = 'https://ads-cdn.fptplay.net/static/banner/2021/05/17b8065615f6c42b421f1fd4fe9c8fd4_6051.jpg';
 
 export const Home = () => {
-  const [ user, dispatchUser ] = useContext(User.context);
+  const [user, dispatchUser] = useContext(User.context);
   const history = useHistory();
   const search = (param) => {
     history.push(param);
@@ -35,24 +36,32 @@ export const Home = () => {
     }
   };
   const getVoucher = (voucher) => {
-    console.log(voucher, user)
-    if(user._id) {
+    console.log(voucher, user);
+    if (user._id) {
       // get voucher
       const get = async () => {
-        const res = await postMethod(`voucher/${voucher._id}/get`, {customer: user._id});
-        if(res.success) {
-          messageSuccess('Success','Get voucher successfully! Please check voucher in account information.')
+        const res = await postMethod(`voucher/${voucher._id}/get`, {
+          customer: user._id,
+        });
+        if (res.success) {
+          messageSuccess(
+            "Success",
+            "Get voucher successfully! Please check voucher in account information."
+          );
         } else {
-          console.log('error', typeof res.error)
-          messageError('Get voucher error',res.error);
+          console.log("error", typeof res.error);
+          messageError("Get voucher error", res.error);
         }
-      }
+      };
       get();
     } else {
       // must login
-      messageError("Error to get voucher",'You must login to use this function')
+      messageError(
+        "Error to get voucher",
+        "You must login to use this function"
+      );
     }
-  }
+  };
   useEffect(() => {
     console.log("first home");
     const getData = async () => {
@@ -94,7 +103,12 @@ export const Home = () => {
                   <Input placeholder="Capacity" />
                 </Form.Item>
               </Col>
-              <Col xs={24} sm={24} md={8} lg={8} xl={8}
+              <Col
+                xs={24}
+                sm={24}
+                md={8}
+                lg={8}
+                xl={8}
                 style={{ display: "flex", justifyContent: "center" }}
               >
                 <Form.Item className="search-btn">
@@ -114,20 +128,27 @@ export const Home = () => {
         {/* <img src={urlimg} alt='br' className="img-br"/> */}
       </div>
       <Divider orientation="left" plain>
+        <h1>Voucher</h1>
+      </Divider>
+      <a href="/voucher" className="view-more-blog" target="_blank">
+        View more
+      </a>
+      <VoucherList
+        data={data.voucher}
+        style={{ width: "100%", height: "230px" }}
+      />
+      <Divider orientation="left" plain>
         <h1>Browse by location</h1>
       </Divider>
       <CarouselCus search={search} />
       <Divider orientation="left" plain>
         <h1>Get inspiration for your next trip</h1>
       </Divider>
-      <a href="/blog" className="view-more-blog">View more</a>
+      <a href="/blog" className="view-more-blog">
+        View more
+      </a>
       <BlogItem blog={data.blog} search={search} />
       {/* <Blogs blog={data.blog} search={search} /> */}
-      <Divider orientation="left" plain>
-        <h1>Vouchers</h1>
-      </Divider>
-      <a href="/voucher" className="view-more-blog">View more</a>
-      <VoucherHome data={data.voucher.length > 2 ? data.voucher.slice(0,2) : []} getVoucher={getVoucher}/>
     </div>
   );
 };
