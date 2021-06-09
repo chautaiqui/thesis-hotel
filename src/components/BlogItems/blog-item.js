@@ -13,7 +13,7 @@ export const BlogItem = (props) => {
       additionalTransfrom={0}
       arrows={false}
       autoPlaySpeed={3000}
-      autoPlay={true}
+      autoPlay={false}
       centerMode={false}
       className=""
       containerClass="container"

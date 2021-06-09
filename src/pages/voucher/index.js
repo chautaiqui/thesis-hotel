@@ -90,7 +90,7 @@ export const VoucherList = (props) => {
         <img
           style={{
             width: "100%",
-            // height: "300px",
+            height: "200px",
             borderRadius: "10px",
           }}
           src={item.img}
@@ -100,5 +100,5 @@ export const VoucherList = (props) => {
       </a>
     </Col>
   ));
-  return <Row gutter={[16,16]}>{list}</Row>;
+  return <Row gutter={[16, 16]}>{list}</Row>;
 };

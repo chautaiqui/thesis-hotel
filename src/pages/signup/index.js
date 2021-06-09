@@ -51,7 +51,7 @@ export const Signup = () => {
       message.error("Phone error!");
       return;
     }
-    
+
     const data = {
       email: email,
       password: password,
@@ -228,7 +228,11 @@ export const Signup = () => {
                 </a>
               </Form.Item>
               <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">
+                <Button
+                  style={{ borderRadius: "15px" }}
+                  type="primary"
+                  htmlType="submit"
+                >
                   Register
                 </Button>
               </Form.Item>
