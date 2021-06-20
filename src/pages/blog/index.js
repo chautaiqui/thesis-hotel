@@ -4,8 +4,6 @@ import { getRequest } from "../../pkg/api";
 import { useLocation, useParams, useHistory } from "react-router-dom";
 import { message, PageHeader, Row, Col } from "antd";
 
-
-
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -21,54 +19,61 @@ const routes = [
   },
 ];
 const initState = {
-  behavior: 'init',
-  data: []
+  behavior: "init",
+  data: [],
 };
+
 export const Blog = () => {
-  const [ state,setState ] = useState(initState);
+  const [state, setState] = useState(initState);
   const history = useHistory();
   const getData = async () => {
-    const res = await getRequest('blog');
-    if(res.success) {
+    const res = await getRequest("blog");
+    if (res.success) {
       setState({
-        behavior: 'stall',
-        data: res.result
-      })
+        behavior: "stall",
+        data: res.result,
+      });
     }
-  }
+  };
   const blogClick = (item) => {
     history.push(`/blog/${item._id}`);
   };
-  useEffect(()=>{
+  useEffect(() => {
     switch (state.behavior) {
-      case 'init':
+      case "init":
         getData();
         return;
-      case 'stall':
-        return
+      case "stall":
+        return;
       default:
         break;
     }
-  },[state]);
+  }, [state]);
   console.log(state);
   return (
     <>
-      <Row gutter={[16,16]} style={{marginTop: 50}}>
-        {
-          state.data.map((item, index) => {
-            return (
-              <Col key={index} xs={24} sm={12} md={8} lg={6} xl={6}
-                onClick={()=>{
-                  blogClick(item)
-                }}
-              >
-                <img src={item.img} alt='blog' style={{maxWidth: '100%'}}/>
-                <p style={{textAlign: 'center', fontWeight: 500}}>{item.title}</p>
-              </Col>
-            )
-          })
-        }
+      <Row gutter={[16, 16]} style={{ marginTop: 50 }}>
+        {state.data.map((item, index) => {
+          return (
+            <Col
+              key={index}
+              xs={24}
+              sm={12}
+              md={8}
+              lg={6}
+              xl={6}
+              onClick={() => {
+                blogClick(item);
+              }}
+            >
+              <img src={item.img} alt="blog" style={{ maxWidth: "100%" }} />
+              <p style={{ textAlign: "center", fontWeight: 500 }}>
+                {item.title}
+              </p>
+            </Col>
+          );
+        })}
       </Row>
     </>
-  )
-}
+  );
+};

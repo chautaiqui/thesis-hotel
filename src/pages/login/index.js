@@ -6,7 +6,7 @@ import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { postMethod } from "../../pkg/api";
 import "./login.style.css";
 export const Login = () => {
-  const [_user, dispatchUser] = useContext(User.context);
+  const [dispatchUser] = useContext(User.context);
   const history = useHistory();
 
   const onFinish = (values) => {
@@ -115,7 +115,6 @@ export const Login = () => {
                   type="password"
                   placeholder="Password"
                 />
-                
               </Form.Item>
               <Form.Item>
                 You don't have a account?{" "}

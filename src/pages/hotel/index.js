@@ -15,6 +15,7 @@ export const Hotel = () => {
   const history = useHistory();
   const [lstHotel, setLstHotel] = useState([]);
   const [form] = Form.useForm();
+  const { Option } = Select;
   var param = location.search
     .slice(1)
     .split("&")
@@ -51,14 +52,14 @@ export const Hotel = () => {
   const onFinish = (value) => {
     setQuery(value);
   };
-  console.log(lstHotel);
+
   return (
     <>
       <div className="hotel-filter">
         <Form name="search-filter" form={form} onFinish={onFinish}>
           <Row gutter={24}>
             <Col xs={24} sm={7} md={7} lg={6} xl={7}>
-              <Form.Item label="Province" name="province">
+              <Form.Item label="Search" name="searchText">
                 <Input />
               </Form.Item>
             </Col>
@@ -76,6 +77,27 @@ export const Hotel = () => {
                     { label: "Price: High to Low", value: "desc" },
                   ]}
                 />
+              </Form.Item>
+            </Col>
+            <Col xs={24} sm={7} md={7} lg={7} xl={7}>
+              <Form.Item label="Conveniences" name="conveniences">
+                <Select
+                  mode="tags"
+                  style={{ width: "100%" }}
+                  placeholder="Please select"
+                >
+                  <Option value="hồ bơi">Hồ Bơi</Option>
+                  <Option value="sân bóng đá">Sân bóng đá</Option>
+                  <Option value="bar">bar</Option>
+                  <Option value="tennis">Tennis</Option>
+                  <Option value="buffet">Buffet</Option>
+                  <Option value="bồn tắm">Bồn tắm</Option>
+                  <Option value="ban công">Ban công</Option>
+                  <Option value="tv">TV</Option>
+                  <Option value="máy giặt">Máy giặt</Option>
+                  <Option value="bãi giữ xe">Bãi giữ xe</Option>
+                  <Option value="khu vực bếp">Khu vực bếp</Option>
+                </Select>
               </Form.Item>
             </Col>
             <Col xs={24} sm={3} md={3} lg={3} xl={3}>
