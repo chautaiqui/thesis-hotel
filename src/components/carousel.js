@@ -44,7 +44,7 @@ const url =
 export const CarouselCus = (props) => {
   const { search = () => {} } = props;
   const handleClick = (item) => {
-    search(`/hotel?province=${item}`);
+    search(`/hotel?searchText=${item}`);
   };
 
   return (

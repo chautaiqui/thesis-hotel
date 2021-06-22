@@ -5,7 +5,7 @@ import { getRequest } from "../../pkg/api";
 import { Row, Col, Pagination, Button, Form, Input, Empty } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { HotelItem } from "../../components/hotel-item";
-import "./hotel.style.css";
+import "./hotel.style.scss";
 
 // const url =
 // "https://res.cloudinary.com/hotellv/image/upload/v1621233855/tmsvnhfbf7vcmks132jy.jpg";
@@ -53,6 +53,14 @@ export const Hotel = () => {
     setQuery(value);
   };
 
+  const onFix = (v) => {
+    setQuery({...query,conveniences:v.join(',')})
+  }
+
+  const onRate = (v) => {
+    setQuery({...query,rating: v})
+  }
+
   return (
     <>
       <div className="hotel-filter">
@@ -69,9 +77,9 @@ export const Hotel = () => {
               </Form.Item>
             </Col>
             <Col xs={24} sm={7} md={7} lg={7} xl={7}>
-              <Form.Item label="Sort" name="averagePrice">
+              <Form.Item label="Sort by price" name="averagePrice">
                 <Select
-                  placeholder="Sort"
+                  placeholder="Sort by Price"
                   options={[
                     { label: "Price: Low to High", value: "asc" },
                     { label: "Price: High to Low", value: "desc" },
@@ -79,27 +87,7 @@ export const Hotel = () => {
                 />
               </Form.Item>
             </Col>
-            <Col xs={24} sm={7} md={7} lg={7} xl={7}>
-              <Form.Item label="Conveniences" name="conveniences">
-                <Select
-                  mode="tags"
-                  style={{ width: "100%" }}
-                  placeholder="Please select"
-                >
-                  <Option value="hồ bơi">Hồ Bơi</Option>
-                  <Option value="sân bóng đá">Sân bóng đá</Option>
-                  <Option value="bar">bar</Option>
-                  <Option value="tennis">Tennis</Option>
-                  <Option value="buffet">Buffet</Option>
-                  <Option value="bồn tắm">Bồn tắm</Option>
-                  <Option value="ban công">Ban công</Option>
-                  <Option value="tv">TV</Option>
-                  <Option value="máy giặt">Máy giặt</Option>
-                  <Option value="bãi giữ xe">Bãi giữ xe</Option>
-                  <Option value="khu vực bếp">Khu vực bếp</Option>
-                </Select>
-              </Form.Item>
-            </Col>
+            
             <Col xs={24} sm={3} md={3} lg={3} xl={3}>
               <Form.Item>
                 <Button
@@ -112,6 +100,47 @@ export const Hotel = () => {
                 </Button>
               </Form.Item>
             </Col>
+
+             
+          </Row>
+          Filter by:  
+          <Row gutter={24}>
+          <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+              <Select
+                  mode="tags"
+                  onChange={onFix}
+                  style={{ width: "100%" }}
+                  placeholder="Conveniences"
+                >
+                  <Option value="hồ bơi">Hồ Bơi</Option>
+                  <Option value="sân bóng đá">Sân bóng đá</Option>
+                  <Option value="bar">Bar</Option>
+                  <Option value="tennis">Tennis</Option>
+                  <Option value="buffet">Buffet</Option>
+                  <Option value="bồn tắm">Bồn tắm</Option>
+                  <Option value="ban công">Ban công</Option>
+                  <Option value="tv">TV</Option>
+                  <Option value="máy giặt">Máy giặt</Option>
+                  <Option value="bãi giữ xe">Bãi giữ xe</Option>
+                  <Option value="khu vực bếp">Khu vực bếp</Option>
+              </Select>
+          </Col>
+            <Col xs={24} sm={5} md={5} lg={5} xl={5}>
+              <Form.Item name="rating">
+                <Select
+                  onChange={onRate}
+                  style={{ width: "100%" }}
+                  placeholder="Star Rating"
+                >
+                  <Option value="">All</Option>
+                  <Option value="1"><i class="fas fa-star"></i></Option>
+                  <Option value="2"><i class="fas fa-star"></i><i class="fas fa-star"></i></Option>
+                  <Option value="3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></Option>
+                  <Option value="4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></Option>
+                  <Option value="5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></Option>
+                </Select>
+              </Form.Item>
+          </Col>
           </Row>
         </Form>
       </div>
