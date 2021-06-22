@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { User } from "../pkg/reducer";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -23,6 +23,7 @@ export const Headers = (props) => {
   const screens = useBreakpoint();
   const breakP = breakPoint(screens);
   const [visible, setVisible] = useState(false);
+  const [avt, setAvt] = useState(user.img);
   const handleClick = () => {
     setVisible(true);
   };
@@ -33,6 +34,7 @@ export const Headers = (props) => {
     history.push("/");
     dispatchUser({ type: "LOGOUT" });
   };
+
   return (
     <nav>
       <div className="div-header">
@@ -40,7 +42,9 @@ export const Headers = (props) => {
           <img
             style={{ height: "50px", width: "50px" }}
             // src={Logo}
-            src={'https://ads-cdn.fptplay.net/static/banner/2021/06/96d6f2e7e1f705ab5e59c84a6dc009b2_3013.png'}
+            src={
+              "https://ads-cdn.fptplay.net/static/banner/2021/06/96d6f2e7e1f705ab5e59c84a6dc009b2_3013.png"
+            }
             alt="logo"
           />
         </div>
@@ -76,7 +80,7 @@ export const Headers = (props) => {
               <NavLink exact to="/account" activeClassName="active">
                 <Avatar
                   src={
-                    user.img ||
+                    avt ||
                     "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                   }
                 />{" "}

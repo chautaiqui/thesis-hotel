@@ -23,11 +23,13 @@ export const Home = () => {
   const onFinish = (values) => {
     console.log(values);
     if (values.location && values.capacity) {
-      search(`/hotel?province=${values.location}&capacity=${values.capacity}`);
+      search(
+        `/hotel?searchText=${values.location}&capacity=${values.capacity}`
+      );
       return;
     }
     if (values.location) {
-      search(`/hotel?province=${values.location}`);
+      search(`/hotel?searchText=${values.location}`);
       return;
     }
     if (values.capacity) {
@@ -35,33 +37,33 @@ export const Home = () => {
       return;
     }
   };
-  const getVoucher = (voucher) => {
-    console.log(voucher, user);
-    if (user._id) {
-      // get voucher
-      const get = async () => {
-        const res = await postMethod(`voucher/${voucher._id}/get`, {
-          customer: user._id,
-        });
-        if (res.success) {
-          messageSuccess(
-            "Success",
-            "Get voucher successfully! Please check voucher in account information."
-          );
-        } else {
-          console.log("error", typeof res.error);
-          messageError("Get voucher error", res.error);
-        }
-      };
-      get();
-    } else {
-      // must login
-      messageError(
-        "Error to get voucher",
-        "You must login to use this function"
-      );
-    }
-  };
+  // const getVoucher = (voucher) => {
+  //   console.log(voucher, user);
+  //   if (user._id) {
+  //     // get voucher
+  //     const get = async () => {
+  //       const res = await postMethod(`voucher/${voucher._id}/get`, {
+  //         customer: user._id,
+  //       });
+  //       if (res.success) {
+  //         messageSuccess(
+  //           "Success",
+  //           "Get voucher successfully! Please check voucher in account information."
+  //         );
+  //       } else {
+  //         console.log("error", typeof res.error);
+  //         messageError("Get voucher error", res.error);
+  //       }
+  //     };
+  //     get();
+  //   } else {
+  //     // must login
+  //     messageError(
+  //       "Error to get voucher",
+  //       "You must login to use this function"
+  //     );
+  //   }
+  // };
   useEffect(() => {
     console.log("first home");
     const getData = async () => {
