@@ -58,7 +58,7 @@ export const Hotel = () => {
   };
 
   const onRate = (v) => {
-    setQuery({ ...query, rating: v });
+    setQuery({ ...query, bookingRating: v });
   };
 
   return (
@@ -167,7 +167,7 @@ export const Hotel = () => {
         {lstHotel.length !== 0 ? (
           lstHotel.map((item, index) => {
             return (
-              <Col key={index} xs={24} sm={24} md={12} lg={12} xl={12}>
+              <Col key={index} xs={24} sm={24} md={24} lg={24} xl={12}>
                 <HotelItem
                   name={item.name}
                   address={`${item.street}, ${item.ward}, ${item.district}, ${item.province}`}
