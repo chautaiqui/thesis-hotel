@@ -54,12 +54,12 @@ export const Hotel = () => {
   };
 
   const onFix = (v) => {
-    setQuery({...query,conveniences:v.join(',')})
-  }
+    setQuery({ ...query, conveniences: v.join(",") });
+  };
 
   const onRate = (v) => {
-    setQuery({...query,rating: v})
-  }
+    setQuery({ ...query, rating: v });
+  };
 
   return (
     <>
@@ -87,7 +87,7 @@ export const Hotel = () => {
                 />
               </Form.Item>
             </Col>
-            
+
             <Col xs={24} sm={3} md={3} lg={3} xl={3}>
               <Form.Item>
                 <Button
@@ -100,47 +100,66 @@ export const Hotel = () => {
                 </Button>
               </Form.Item>
             </Col>
-
-             
           </Row>
-          Filter by:  
+          Filter by:
           <Row gutter={24}>
-          <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+            <Col xs={24} sm={12} md={12} lg={12} xl={12}>
               <Select
-                  mode="tags"
-                  onChange={onFix}
-                  style={{ width: "100%" }}
-                  placeholder="Conveniences"
-                >
-                  <Option value="hồ bơi">Hồ Bơi</Option>
-                  <Option value="sân bóng đá">Sân bóng đá</Option>
-                  <Option value="bar">Bar</Option>
-                  <Option value="tennis">Tennis</Option>
-                  <Option value="buffet">Buffet</Option>
-                  <Option value="bồn tắm">Bồn tắm</Option>
-                  <Option value="ban công">Ban công</Option>
-                  <Option value="tv">TV</Option>
-                  <Option value="máy giặt">Máy giặt</Option>
-                  <Option value="bãi giữ xe">Bãi giữ xe</Option>
-                  <Option value="khu vực bếp">Khu vực bếp</Option>
+                mode="tags"
+                onChange={onFix}
+                style={{ width: "100%" }}
+                placeholder="Conveniences"
+              >
+                <Option value="hồ bơi">Hồ Bơi</Option>
+                <Option value="sân bóng đá">Sân bóng đá</Option>
+                <Option value="bar">Bar</Option>
+                <Option value="tennis">Tennis</Option>
+                <Option value="buffet">Buffet</Option>
+                <Option value="bồn tắm">Bồn tắm</Option>
+                <Option value="ban công">Ban công</Option>
+                <Option value="tv">TV</Option>
+                <Option value="máy giặt">Máy giặt</Option>
+                <Option value="bãi giữ xe">Bãi giữ xe</Option>
+                <Option value="khu vực bếp">Khu vực bếp</Option>
               </Select>
-          </Col>
+            </Col>
             <Col xs={24} sm={5} md={5} lg={5} xl={5}>
-              <Form.Item name="rating">
+              <Form.Item name="bookingRating">
                 <Select
                   onChange={onRate}
                   style={{ width: "100%" }}
                   placeholder="Star Rating"
                 >
                   <Option value="">All</Option>
-                  <Option value="1"><i class="fas fa-star"></i></Option>
-                  <Option value="2"><i class="fas fa-star"></i><i class="fas fa-star"></i></Option>
-                  <Option value="3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></Option>
-                  <Option value="4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></Option>
-                  <Option value="5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></Option>
+                  <Option value="0">0 star</Option>
+                  <Option value="1">
+                    <i class="fas fa-star"></i>
+                  </Option>
+                  <Option value="2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </Option>
+                  <Option value="3">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </Option>
+                  <Option value="4">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </Option>
+                  <Option value="5">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </Option>
                 </Select>
               </Form.Item>
-          </Col>
+            </Col>
           </Row>
         </Form>
       </div>
