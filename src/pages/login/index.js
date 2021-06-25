@@ -6,7 +6,7 @@ import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { postMethod } from "../../pkg/api";
 import "./login.style.css";
 export const Login = () => {
-  const [dispatchUser] = useContext(User.context);
+  const [user, dispatchUser] = useContext(User.context);
   const history = useHistory();
 
   const onFinish = (values) => {

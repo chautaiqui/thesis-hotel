@@ -80,7 +80,7 @@ export const Headers = (props) => {
               <NavLink exact to="/account" activeClassName="active">
                 <Avatar
                   src={
-                    avt ||
+                    user.img ||
                     "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                   }
                 />{" "}

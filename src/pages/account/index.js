@@ -50,7 +50,7 @@ const tailFormItemLayout = {
 };
 
 export const Account = () => {
-  const [user] = useContext(User.context);
+  const [user, dispatchUser] = useContext(User.context);
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const [form_pass] = Form.useForm();
@@ -95,6 +95,8 @@ export const Account = () => {
       if (res.success) {
         message.success("Updated infomation successfully!");
         form.setFieldsValue(res.result);
+        console.log({type: 'UPDATE', user: res.result})
+        dispatchUser({type: 'UPDATE', user: res.result})
         setLoading(false);
         return;
       } else {
@@ -144,7 +146,7 @@ export const Account = () => {
     <div>
       <Row gutter={[16, 16]}>
         <Col span={24} style={{ display: "flex", justifyContent: "center" }}>
-          <Avatar size={40} src={avt}></Avatar>
+          <Avatar size={40} src={user.img}></Avatar>
         </Col>
       </Row>
       <Row gutter={[16, 16]}>

@@ -15,7 +15,7 @@
     }
   }
   .hotel-body {
-    width: 50%;
+    width: 60%;
     float: left;
     margin-left: 20px;
     .hotel-name {
@@ -28,6 +28,9 @@
     .hotel-name:hover {
       color: #473a00;
     }
+    .hotel-price {
+      margin-bottom: 0;
+    }
     .hotel-desc {
       margin-top: 10px;
       overflow: hidden;
@@ -38,7 +41,7 @@
     .address {
       color: #0071c2;
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 0.725rem;
     }
   }
 }
