@@ -85,7 +85,7 @@ export const Voucher = () => {
 export const VoucherList = (props) => {
   const { data = [] } = props;
   const list = data.splice(0, 2).map((item, index) => (
-    <Col xs={24} sm={12}>
+    <Col xs={24} sm={12} key={index}>
       <a href="/voucher">
         <img
           style={{
