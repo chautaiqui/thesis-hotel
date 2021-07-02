@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { getRequest } from "../../pkg/api";
 
 import { useLocation, useParams } from "react-router-dom";
@@ -9,7 +9,7 @@ import { Booking } from "../../components/booking1";
 import "./detailhotel.style.css";
 
 export const DetailHotel = (props) => {
-  const {id} = useParams();
+  const { id } = useParams();
   const [hotel, setHotel] = useState({});
   const [room, setRoom] = useState([]);
 
@@ -50,7 +50,7 @@ export const DetailHotel = (props) => {
     <>
       {id ? (
         <div>
-          <HotelHeader hotel={hotel}/>
+          <HotelHeader hotel={hotel} />
           <div style={{ marginTop: 20 }}>
             {/* <h1 style={{ fontWeight: "bolder" }}>{hotel.name}</h1> */}
             <div className="detail-decr">
@@ -59,14 +59,13 @@ export const DetailHotel = (props) => {
                   src="https://res.cloudinary.com/fpt-telecom/image/upload/v1621972432/ife6wabz6l5jrzqoagby.png"
                   alt="lct"
                   style={{ height: "24px" }}
-
                 />
-                {`${hotel.street} ${hotel.ward} ${hotel.district} ${hotel.province}`}
+                {`${hotel.street}, ${hotel.ward}, ${hotel.district}, ${hotel.province}`}
               </p>
               <iframe
                 loading="lazy"
                 allowfullscreen
-                style={{ height: "300px", width: "100%" , border: 'none'}}
+                style={{ height: "300px", width: "100%", border: "none" }}
                 src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDw1VghHA44aPt_JcYB7ac29AKDJja1OgM&q=${hotel.street},${hotel.ward}+${hotel.district}+${hotel.province}`}
               ></iframe>
             </div>
@@ -82,7 +81,7 @@ export const DetailHotel = (props) => {
               </h3>
             </div>
           </div>
-          <Booking hotel={hotel} room={room}/>
+          <Booking hotel={hotel} room={room} />
         </div>
       ) : (
         <h1>Page not found</h1>
