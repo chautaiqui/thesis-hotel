@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { getRequest } from "../../pkg/api";
 import { useParams } from "react-router-dom";
 import { message, PageHeader, Row, Col } from "antd";
-import "./styles.scss";
 import moment from "moment";
+
+import RecommendBlog from "../../components/RecommendBlog";
+import "./styles.scss";
 
 const routes = [
   {
@@ -33,6 +35,7 @@ export const BlogItem = () => {
     if (!post._id) {
       fetchPost();
     }
+    // eslint-disable-next-line
   }, [id]);
 
   return (
@@ -47,9 +50,21 @@ export const BlogItem = () => {
           )}
         />
         <Row>
-          <Col span={20} offset={2}>
+          <Col span={18} style={{ marginRight: 10 }}>
             <img className="img-post" src={post.img} alt="img-post" />
             <p className="content-blog">{post.content}</p>
+          </Col>
+          <Col span={5}>
+            <p
+              style={{
+                fontSize: "15px",
+                fontWeight: 400,
+                textTransform: "uppercase",
+              }}
+            >
+              Recommend Blog
+            </p>
+            <RecommendBlog />
           </Col>
         </Row>
       </div>

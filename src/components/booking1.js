@@ -1,17 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { User } from "../pkg/reducer";
 import { RoomItem } from "./room-item";
-import {
-  Row,
-  Col,
-  Calendar,
-  Select,
-  Typography,
-  notification,
-  Modal,
-  Button,
-  message,
-} from "antd";
+import { Row, Col, notification, Modal, Button, message } from "antd";
 import { CalendarCustom } from "./calendar-custom";
 import { Facilities } from "./facilities";
 import { SelectVoucher } from "./select-voucher";
@@ -31,7 +21,6 @@ const openNotificationWithIcon = (type, description) => {
 
 export const Booking = ({ hotel, room }) => {
   const [selected, setSelected] = useState({}); //room
-  const [booking, setBooking] = useState({});
   const [selectedVoucher, setSelectedVoucher] = useState();
   const [selectedDate, setSelectedDate] = useState({});
   const [user] = useContext(User.context);
@@ -40,8 +29,6 @@ export const Booking = ({ hotel, room }) => {
   useEffect(() => {
     setSelected(selected);
   }, [selected]);
-
-  console.log(selectedDate.startDate);
 
   //Modal show price
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -56,10 +43,6 @@ export const Booking = ({ hotel, room }) => {
     } else setIsModalVisible(true);
   };
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
   const handleCancel = () => {
     setIsModalVisible(false);
   };
@@ -67,7 +50,6 @@ export const Booking = ({ hotel, room }) => {
 
   const selectRoom = (item) => {
     setSelected(item);
-    setBooking(item);
   };
   const onSelectDate = (date) => {
     setSelectedDate(date);
@@ -116,8 +98,7 @@ export const Booking = ({ hotel, room }) => {
       const createBooking = async () => {
         const res = await postMethod("/booking/create", data);
         if (res.success) {
-          message.success("Create account sucessfully!");
-          console.log(res);
+          message.success("Booking sucessful!");
         } else {
           message.error(res.error);
           return;
@@ -135,8 +116,7 @@ export const Booking = ({ hotel, room }) => {
       const createBooking = async () => {
         const res = await postMethod("/booking/create", data);
         if (res.success) {
-          message.success("Create account sucessfully!");
-          console.log(res);
+          message.success("Booking sucessfull!");
         } else {
           message.error(res.error);
           return;

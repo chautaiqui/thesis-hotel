@@ -6,11 +6,8 @@ import "./css/voucher.style.scss";
 
 export const VoucherItem = (props) => {
   const {
-    hotel,
     discount,
-    discountLimit,
     roomType,
-    img,
     endDate,
     getVoucher = () => {},
     voucher,

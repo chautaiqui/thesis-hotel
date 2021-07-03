@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Select } from "antd";
 import moment from "moment";
 const { Option } = Select;
@@ -19,12 +19,14 @@ export const SelectVoucher = ({
         style={{ width: "100%" }}
         onChange={onSelectVoucher}
       >
+        <Option value="null">Not choose voucher</Option>
         {voucher.map((item, index) => {
           if (
             hotelName !== item.hotel.name ||
             selectedRoom.roomType.name !== item.roomType.name ||
             moment(new Date()).isAfter(expired)
           ) {
+            // eslint-disable-next-line
             return;
           } else {
             return (

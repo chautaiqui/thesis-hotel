@@ -24,7 +24,7 @@ const RouterContainer = (props) => {
   useEffect(() => {
     const { email, api_token } = localStorage;
     const checkUser = async () => {
-      console.log('chcek')
+      console.log("chcek");
       try {
         const res = await postRequest("customer/login", {
           email: email,
@@ -47,13 +47,14 @@ const RouterContainer = (props) => {
         setCheck(true);
       }
     };
-    console.log('local storage', check, email, api_token)
+    console.log("local storage", check, email, api_token);
     if (!check) {
       if (email && api_token) {
-        console.log('call check')
+        console.log("call check");
         checkUser();
       } else setCheck(true);
     }
+    // eslint-disable-next-line
   }, [check]);
 
   return (

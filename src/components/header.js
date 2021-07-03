@@ -1,12 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { User } from "../pkg/reducer";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { Grid, Button, Drawer, Avatar } from "antd";
 import "./css/header.style.css";
 import { MenuFoldOutlined, LogoutOutlined } from "@ant-design/icons";
-
-import Logo from "../assets/logo.png";
 
 const { useBreakpoint } = Grid;
 
@@ -23,7 +21,6 @@ export const Headers = (props) => {
   const screens = useBreakpoint();
   const breakP = breakPoint(screens);
   const [visible, setVisible] = useState(false);
-  const [avt, setAvt] = useState(user.img);
   const handleClick = () => {
     setVisible(true);
   };

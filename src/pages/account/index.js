@@ -59,6 +59,10 @@ export const Account = () => {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
+    setAvt(user.img);
+  }, [user.img]);
+
+  useEffect(() => {
     const fetchHistory = async () => {
       const re = await getRequest(`/customer/${user._id}/booking`);
       if (!re.success) {
@@ -69,8 +73,8 @@ export const Account = () => {
       }
     };
     fetchHistory();
+    // eslint-disable-next-line
   }, []);
-  console.log(history);
 
   useEffect(() => {
     form.setFieldsValue({
@@ -80,6 +84,7 @@ export const Account = () => {
       contactNumber: user.phone,
       address: user.address,
     });
+    // eslint-disable-next-line
   }, [user]);
 
   const onFinish = (values) => {
@@ -105,7 +110,6 @@ export const Account = () => {
       if (res.success) {
         message.success("Updated infomation successfully!");
         form.setFieldsValue(res.result);
-        console.log({ type: "UPDATE", user: res.result });
         dispatchUser({ type: "UPDATE", user: res.result });
         setLoading(false);
         return;

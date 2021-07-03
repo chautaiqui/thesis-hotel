@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React from "react";
 
-export const BookingInfo = props => {
-  return <></>
-}
+export const BookingInfo = (props) => {
+  return <></>;
+};

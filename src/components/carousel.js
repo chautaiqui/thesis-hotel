@@ -38,8 +38,7 @@ const location = [
     src: "https://ads-cdn.fptplay.net/static/banner/2021/06/b709110fd348bafbfdb4b672cf8fdb83_8791.png",
   },
 ];
-const url =
-  "https://ads-cdn.fptplay.net/static/banner/2021/05/238022d83feb880f42fd0dcf9c1a96ca_7780.png";
+
 export const CarouselCus = (props) => {
   const { search = () => {} } = props;
   const handleClick = (item) => {
@@ -119,8 +118,6 @@ export const CarouselCus = (props) => {
 };
 
 export const ImgCarousel = (props) => {
-  const { imgs } = props;
-  console.log(imgs);
   return (
     <Carousel
       slides={props.imgs.map((item, index) => (
