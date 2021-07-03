@@ -10,7 +10,7 @@ const location = [
     src: "https://ads-cdn.fptplay.net/static/banner/2021/06/449b4879f77b63066602ec54c57e4c31_2299.png",
   },
   {
-    name: "Da Lat",
+    name: "Đà Lạt",
     src: "https://ads-cdn.fptplay.net/static/banner/2021/06/53771383b5063a918d1c865d377cfa30_686.png",
   },
   {
@@ -37,7 +37,6 @@ const location = [
     name: "Hoi An",
     src: "https://ads-cdn.fptplay.net/static/banner/2021/06/b709110fd348bafbfdb4b672cf8fdb83_8791.png",
   },
-
 ];
 const url =
   "https://ads-cdn.fptplay.net/static/banner/2021/05/238022d83feb880f42fd0dcf9c1a96ca_7780.png";
@@ -106,7 +105,7 @@ export const CarouselCus = (props) => {
                   // padding: "0 0 0 60px",
                   // fontSize: "15px",
                   fontWeight: 500,
-                  textAlign: 'center'
+                  textAlign: "center",
                 }}
               >
                 {item.name}

@@ -25,9 +25,7 @@ export const VoucherItem = (props) => {
         <div className="voucher-body">
           <h3>{voucher.hotel.name}</h3>
 
-          <b className="discount">
-            {discount}% OFF YOUR PURCHASE, LIMIT: {discountLimit} VNĐ
-          </b>
+          <b className="discount">{discount}% OFF YOUR PURCHASE</b>
 
           <div className="voucher-promotion">
             <p>

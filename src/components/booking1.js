@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { User } from "../pkg/reducer";
 import { RoomItem } from "./room-item";
 import {
@@ -10,6 +10,7 @@ import {
   notification,
   Modal,
   Button,
+  message,
 } from "antd";
 import { CalendarCustom } from "./calendar-custom";
 import { Facilities } from "./facilities";
@@ -17,6 +18,7 @@ import { SelectVoucher } from "./select-voucher";
 import { BookingInfo } from "./booking-info";
 import Moment from "moment";
 import { extendMoment } from "moment-range";
+import { postMethod } from "../pkg/api";
 
 const moment = extendMoment(Moment);
 
@@ -28,23 +30,30 @@ const openNotificationWithIcon = (type, description) => {
 };
 
 export const Booking = ({ hotel, room }) => {
-  console.log(hotel, room);
   const [selected, setSelected] = useState({}); //room
   const [booking, setBooking] = useState({});
-  const [selectedVoucher, setSelectedVoucher] = useState({});
+  const [selectedVoucher, setSelectedVoucher] = useState();
   const [selectedDate, setSelectedDate] = useState({});
   const [user] = useContext(User.context);
   const [roomPrice, setRoomPrice] = useState(0);
+
+  useEffect(() => {
+    setSelected(selected);
+  }, [selected]);
+
+  console.log(selectedDate.startDate);
+
   //Modal show price
   const [isModalVisible, setIsModalVisible] = useState(false);
-
   const showModal = () => {
-    if (
-      selected.roomType.name !== selectedVoucher.roomType.name ||
-      moment(selectedVoucher.endDate).isBefore(moment(selectedDate.startDate))
-    )
-      setIsModalVisible(false);
-    else setIsModalVisible(true);
+    if (selectedVoucher) {
+      if (
+        selected.roomType.name !== selectedVoucher.roomType.name ||
+        moment(selectedVoucher.endDate).isBefore(moment(selectedDate.startDate))
+      )
+        setIsModalVisible(false);
+      else setIsModalVisible(true);
+    } else setIsModalVisible(true);
   };
 
   const handleOk = () => {
@@ -66,7 +75,6 @@ export const Booking = ({ hotel, room }) => {
 
   const onSelectVoucher = (index) => {
     setSelectedVoucher(user.voucher[index]);
-    console.log({ selectedVoucher });
   };
 
   const payment = () => {
@@ -95,6 +103,48 @@ export const Booking = ({ hotel, room }) => {
     }
   };
 
+  const submit = () => {
+    if (selectedVoucher) {
+      const data = {
+        room: selected._id,
+        customer: user._id,
+        bookingStart: moment(selectedDate.startDate).format(["DD-MM-YYYY"]),
+        bookingEnd: moment(selectedDate.endDate).format(["DD-MM-YYYY"]),
+        voucher: selectedVoucher._id,
+        totalMoney: roomPrice,
+      };
+      const createBooking = async () => {
+        const res = await postMethod("/booking/create", data);
+        if (res.success) {
+          message.success("Create account sucessfully!");
+          console.log(res);
+        } else {
+          message.error(res.error);
+          return;
+        }
+      };
+      createBooking();
+    } else {
+      const data = {
+        room: selected._id,
+        customer: user._id,
+        bookingStart: moment(selectedDate.startDate).format(["DD-MM-YYYY"]),
+        bookingEnd: moment(selectedDate.endDate).format(["DD-MM-YYYY"]),
+        totalMoney: roomPrice,
+      };
+      const createBooking = async () => {
+        const res = await postMethod("/booking/create", data);
+        if (res.success) {
+          message.success("Create account sucessfully!");
+          console.log(res);
+        } else {
+          message.error(res.error);
+          return;
+        }
+      };
+      createBooking();
+    }
+  };
   return (
     <>
       <Row gutter={[16, 16]}>
@@ -132,26 +182,30 @@ export const Booking = ({ hotel, room }) => {
                 <Facilities data={selected.facilities} />
                 {user._id && (
                   <SelectVoucher
+                    hotelName={hotel.name}
                     voucher={user.voucher}
                     onSelectVoucher={onSelectVoucher}
+                    selectedRoom={selected}
                   />
                 )}
                 <BookingInfo />
                 <Button
                   type="primary"
                   onClick={() => {
-                    showModal();
                     payment();
+                    showModal();
                   }}
+                  style={{ marginTop: "20px" }}
                 >
-                  Booking
+                  Show price
                 </Button>
                 <Modal
                   title="Basic Modal"
                   visible={isModalVisible}
-                  onOk={handleOk}
+                  onOk={submit}
                   onCancel={handleCancel}
                 >
+                  Price for this room:{" "}
                   {roomPrice.toLocaleString("it-IT", {
                     style: "currency",
                     currency: "VND",
