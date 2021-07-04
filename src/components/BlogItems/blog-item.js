@@ -1,7 +1,5 @@
 import React from "react";
-// import { getRequest } from '../pkg/api';
 import Carousel from "react-multi-carousel";
-import { Card } from "antd";
 import "react-multi-carousel/lib/styles.css";
 
 import "./styles.scss";
@@ -15,7 +13,6 @@ export const BlogItem = (props) => {
       autoPlaySpeed={3000}
       autoPlay={false}
       centerMode={false}
-      className=""
       containerClass="container"
       dotListClass={false}
       draggable={false}

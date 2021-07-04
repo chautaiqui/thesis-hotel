@@ -33,7 +33,7 @@ const Footer = () => (
       <div className="menu">
         <h4 className="menu-title">Menu</h4>
 
-        <a href="#" className="menu-links">
+        <a href="/" className="menu-links">
           Join Me
         </a>
 
@@ -44,11 +44,11 @@ const Footer = () => (
           My Blogs
         </a>
 
-        <a href="#" className="menu-links">
+        <a href="/" className="menu-links">
           My Journey
         </a>
 
-        <a href="#" className="menu-links">
+        <a href="/" className="menu-links">
           About
         </a>
       </div>
@@ -68,7 +68,7 @@ const Footer = () => (
 
     <p className="copyright">
       &copy Copyright 2021 |{" "}
-      <a href="https://instagram.com/ronakgiriraj">❤️ Hotel Booking</a>
+      <a href="https://instagram.com/ronakgiriraj"> Hotel Booking</a>
     </p>
   </footer>
 );

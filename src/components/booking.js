@@ -149,7 +149,6 @@ export const Booking = (props) => {
   const [form] = Form.useForm();
 
   const chooseWeek = (date, dateString) => {
-    console.log(date, dateString);
     var temp = dateString.split("-");
     var year = Number(temp[0]);
     var week = Number(temp[1].match(/\d+/g));
@@ -199,7 +198,6 @@ export const Booking = (props) => {
   const onCell = (record, rowIndex) => {
     return {
       onClick: (event) => {
-        console.log(record, event.target);
         if (event.target.tagName !== "TD") return;
         var _b = document.querySelector("#tablebooking tbody");
         var _p;
@@ -210,7 +208,6 @@ export const Booking = (props) => {
             _p = item;
         });
         var _c = event.target.parentNode;
-        // console.log(_b, _p, _c);
         var idx = Array.prototype.slice
           .call(event.target.parentNode.childNodes)
           .findIndex((item) => item === event.target);
@@ -229,10 +226,7 @@ export const Booking = (props) => {
                   ? [tm, ...choose.lstday]
                   : [...choose.lstday, tm];
               var check = true;
-              newlst.forEach((item, index) => {
-                // console.log(item)
-              });
-              console.log(check, newlst);
+              newlst.forEach((item, index) => {});
               if (check) {
                 event.target.style.background = "#7fff00";
                 setChoose({ ...choose, lstday: newlst });
@@ -244,10 +238,7 @@ export const Booking = (props) => {
                 event.target.style.background = "#7fff00";
                 setChoose({ ...choose, lstday: [tm] });
               }
-              // console.log('past: ',_p, choose.lstday)
-              // setChoose({...choose, lstday: [...choose.lstday, tm]})
             } else {
-              // current !== past
               // xoa het _p
               if (_p) {
                 _p.childNodes.forEach((i) => {
@@ -273,7 +264,6 @@ export const Booking = (props) => {
       },
     };
   };
-  console.log(choose);
   return (
     <div>
       <h3

@@ -45,6 +45,7 @@ export const Hotel = () => {
       }
     };
     getHotel();
+    // eslint-disable-next-line
   }, [query]);
   const hotelClick = (item) => {
     history.push(`/hotel/${item._id}`);

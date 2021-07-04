@@ -9,13 +9,14 @@ import {
   DatePicker,
   Button,
   message,
+  Card,
 } from "antd";
 import { EditText } from "react-edit-text";
 import { User } from "../../pkg/reducer";
 import "react-edit-text/dist/index.css";
 import moment from "moment";
 import "./account.style.css";
-import { postMethod, putMethod } from "../../pkg/api";
+import { getRequest, postMethod, putMethod } from "../../pkg/api";
 import { CustomUpload } from "../../commons";
 import { VoucherItem } from "../../components/voucher-item";
 const formItemLayout = {
@@ -55,6 +56,25 @@ export const Account = () => {
   const [form] = Form.useForm();
   const [form_pass] = Form.useForm();
   const [avt, setAvt] = useState(user.img);
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    setAvt(user.img);
+  }, [user.img]);
+
+  useEffect(() => {
+    const fetchHistory = async () => {
+      const re = await getRequest(`/customer/${user._id}/booking`);
+      if (!re.success) {
+        message.error(re.message);
+      } else {
+        if (re.result.length === 0) return;
+        setHistory(re.result.bookings);
+      }
+    };
+    fetchHistory();
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     form.setFieldsValue({
@@ -64,15 +84,10 @@ export const Account = () => {
       contactNumber: user.phone,
       address: user.address,
     });
-    console.log("12");
-
-    // get api booking
-    // setBooking(data);
+    // eslint-disable-next-line
   }, [user]);
-  console.log(user.img);
 
   const onFinish = (values) => {
-    // console.log(values);
     const data = {
       email: values.email,
       name: values.name,
@@ -95,8 +110,7 @@ export const Account = () => {
       if (res.success) {
         message.success("Updated infomation successfully!");
         form.setFieldsValue(res.result);
-        console.log({type: 'UPDATE', user: res.result})
-        dispatchUser({type: 'UPDATE', user: res.result})
+        dispatchUser({ type: "UPDATE", user: res.result });
         setLoading(false);
         return;
       } else {
@@ -279,7 +293,26 @@ export const Account = () => {
               </Form>
             </Tabs.TabPane>
             <Tabs.TabPane tab="History" key="3">
-              History
+              <Row gutter={[16, 16]}>
+                {history.map((item) => {
+                  return (
+                    <Card
+                      title={`Room ${item.room.name}`}
+                      style={{ width: 300, marginLeft: 20 }}
+                    >
+                      <p>
+                        Start booking :
+                        {moment(item.bookingStart).format("DD MM YYYY")}
+                      </p>
+                      <p>
+                        End booking :
+                        {moment(item.bookingEnd).format("DD MM YYYY")}
+                      </p>
+                      <p>status :{item.bookingStatus}</p>
+                    </Card>
+                  );
+                })}
+              </Row>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Voucher" key="4">
               <Row gutter={[16, 16]}>

@@ -6,10 +6,8 @@ import "./css/voucher.style.scss";
 
 export const VoucherItem = (props) => {
   const {
-    hotel,
     discount,
     roomType,
-    img,
     endDate,
     getVoucher = () => {},
     voucher,
@@ -22,7 +20,7 @@ export const VoucherItem = (props) => {
           <img src={voucher.img} alt="hinh" />
         </div>
         <div className="voucher-body">
-          <h3>{hotel}</h3>
+          <h3>{voucher.hotel.name}</h3>
 
           <b className="discount">{discount}% OFF YOUR PURCHASE</b>
 
