@@ -71,6 +71,7 @@ export const CalendarCustom = ({ onSelectDate, bookings }) => {
     <>
       <Space direction="vertical" size={12}>
         <RangePicker
+          allowClear={false}
           open
           disabledDate={disableDates}
           size="small"
