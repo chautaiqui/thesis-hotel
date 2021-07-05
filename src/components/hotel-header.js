@@ -7,22 +7,22 @@ const default_img =
 export const HotelHeader = ({ hotel }) => {
   const { imgs, rated, name } = hotel;
   const [viewimg, setViewimg] = useState(false);
-  const rate = () => {
-    console.log("click");
-  };
+
+  console.log({ hotel });
   const viewDetail = () => {
     setViewimg(true);
   };
   return (
     <>
       <h1 style={{ fontWeight: "bolder" }}>{name}</h1>
-      <p onClick={rate}>
+      <p>
         <img
           src="https://ads-cdn.fptplay.net/static/banner/2021/06/e54399990405e70797a942a2fff4c159_484.png"
           alt="hinh"
           className="hotel-header-star"
         />
         <ins>{rated ? rated.avgValue + " rated" : "5 rated"}</ins>
+        <a href="#">Có {rated ? rated.amount : ""} bài đánh giá</a>
       </p>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12} onClick={viewDetail}>

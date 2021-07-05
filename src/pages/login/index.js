@@ -8,6 +8,7 @@ import "./login.style.css";
 export const Login = () => {
   const [user, dispatchUser] = useContext(User.context);
   const history = useHistory();
+  console.log(user);
 
   const onFinish = (values) => {
     console.log(values);
