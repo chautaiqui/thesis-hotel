@@ -308,7 +308,10 @@ export const Account = () => {
                         End booking :
                         {moment(item.bookingEnd).format("DD MM YYYY")}
                       </p>
-                      <p>status :{item.bookingStatus}</p>
+                      <p>
+                        status :
+                        {item.bookingStatus === "pending" ? "Booked" : ""}
+                      </p>
                     </Card>
                   );
                 })}

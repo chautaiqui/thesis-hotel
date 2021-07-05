@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { getRequest } from "../../pkg/api";
-
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { message } from "antd";
+import { Divider, message, Row, Col } from "antd";
+
+import { User } from "../../pkg/reducer";
+import { getRequest } from "../../pkg/api";
 import { HotelHeader } from "../../components/hotel-header";
 import { Booking } from "../../components/booking1";
-import { HotelRating } from "../../components/HotelRating/hotel-rating";
+import HotelRating from "../../components/HotelRating";
+import ReviewRating from "../../components/ReviewRating";
 import "./detailhotel.style.css";
 
 export const DetailHotel = (props) => {
+  const [user] = useContext(User.context);
   const { id } = useParams();
   const [hotel, setHotel] = useState({});
   const [room, setRoom] = useState([]);
@@ -32,7 +35,6 @@ export const DetailHotel = (props) => {
   useEffect(() => {
     const fetchRoom = async () => {
       const re = await getRequest(`hotel/${hotel._id}/room`);
-      console.log(re);
       if (!re.success) {
         message.error(re.message);
       } else {
@@ -46,7 +48,7 @@ export const DetailHotel = (props) => {
     }
     // eslint-disable-next-line
   }, [hotel]);
-  console.log(hotel);
+
   return (
     <>
       {id ? (
@@ -84,7 +86,16 @@ export const DetailHotel = (props) => {
             </div>
           </div>
           <Booking hotel={hotel} room={room} />
-          <HotelRating />
+          <Divider>Review</Divider>
+
+          <Row gutter={[16, 16]}>
+            <Col span={12}>
+              {user._id ? <HotelRating hotelId={hotel._id} user={user} /> : ""}
+            </Col>
+            <Col span={12}>
+              <ReviewRating hotelId={hotel._id} />
+            </Col>
+          </Row>
         </div>
       ) : (
         <h1>Page not found</h1>

@@ -7,6 +7,7 @@ import "./home.style.css";
 import { BlogItem } from "../../components/BlogItems/blog-item";
 import { getRequest } from "../../pkg/api";
 import { VoucherList } from "../voucher";
+import TopRating from "../../components/TopRating";
 
 export const Home = () => {
   const history = useHistory();
@@ -75,7 +76,7 @@ export const Home = () => {
               </Col>
               <Col xs={24} sm={24} md={10} lg={10} xl={10}>
                 <Form.Item name="capacity">
-                  <Input placeholder="Capacity" />
+                  <Input placeholder="Capacity" type="number" min="1" />
                 </Form.Item>
               </Col>
               <Col
@@ -116,6 +117,10 @@ export const Home = () => {
         <h1>Browse by location</h1>
       </Divider>
       <CarouselCus search={search} />
+      <Divider orientation="left" plain>
+        <h1>Top Hotel</h1>
+      </Divider>
+      <TopRating />
       <Divider orientation="left" plain>
         <h1>Get inspiration for your next trip</h1>
       </Divider>

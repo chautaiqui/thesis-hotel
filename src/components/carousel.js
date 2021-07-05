@@ -1,6 +1,5 @@
 import React from "react";
 import InfiniteCarousel from "react-leaf-carousel";
-import { Carousel } from "3d-react-carousal";
 
 import "./css/carousel.css";
 
@@ -114,17 +113,5 @@ export const CarouselCus = (props) => {
         })}
       </InfiniteCarousel>
     </div>
-  );
-};
-
-export const ImgCarousel = (props) => {
-  return (
-    <Carousel
-      slides={props.imgs.map((item, index) => (
-        <img src={item} alt={index} style={{ height: "31em", width: "auto" }} />
-      ))}
-      autoplay={true}
-      interval={3500}
-    />
   );
 };
