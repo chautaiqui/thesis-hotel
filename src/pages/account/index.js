@@ -11,7 +11,6 @@ import {
   message,
   Card,
 } from "antd";
-import { useHistory } from "react-router";
 import axios from "axios";
 import { EditText } from "react-edit-text";
 import "react-edit-text/dist/index.css";
@@ -54,7 +53,6 @@ const tailFormItemLayout = {
 };
 
 export const Account = () => {
-  const history = useHistory();
   const [user, dispatchUser] = useContext(User.context);
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
@@ -79,11 +77,23 @@ export const Account = () => {
     fetchHistory();
     // eslint-disable-next-line
   }, []);
+  useEffect(() => {
+    const fetchHistory = async () => {
+      const re = await getRequest(`/customer/${user._id}/booking`);
+      if (!re.success) {
+        message.error(re.message);
+      } else {
+        if (re.result.length === 0) return;
+        setHistory(re.result.bookings);
+      }
+    };
+    fetchHistory();
+    // eslint-disable-next-line
+  }, [booking]);
 
   const deleteBooking = async (id) => {
     await axios.put(`https://hotel-lv.herokuapp.com/api/booking/${id}/cancel`);
     await message.success("Deleted");
-    await history.go("/");
   };
 
   useEffect(() => {
