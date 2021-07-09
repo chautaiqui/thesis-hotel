@@ -11,11 +11,13 @@ import {
   message,
   Card,
 } from "antd";
+import axios from "axios";
 import { EditText } from "react-edit-text";
-import { User } from "../../pkg/reducer";
 import "react-edit-text/dist/index.css";
 import moment from "moment";
+
 import "./account.style.css";
+import { User } from "../../pkg/reducer";
 import { getRequest, postMethod, putMethod } from "../../pkg/api";
 import { CustomUpload } from "../../commons";
 import { VoucherItem } from "../../components/voucher-item";
@@ -56,7 +58,7 @@ export const Account = () => {
   const [form] = Form.useForm();
   const [form_pass] = Form.useForm();
   const [avt, setAvt] = useState(user.img);
-  const [history, setHistory] = useState([]);
+  const [booking, setHistory] = useState([]);
 
   useEffect(() => {
     setAvt(user.img);
@@ -75,6 +77,24 @@ export const Account = () => {
     fetchHistory();
     // eslint-disable-next-line
   }, []);
+  useEffect(() => {
+    const fetchHistory = async () => {
+      const re = await getRequest(`/customer/${user._id}/booking`);
+      if (!re.success) {
+        message.error(re.message);
+      } else {
+        if (re.result.length === 0) return;
+        setHistory(re.result.bookings);
+      }
+    };
+    fetchHistory();
+    // eslint-disable-next-line
+  }, [booking]);
+
+  const deleteBooking = async (id) => {
+    await axios.put(`https://hotel-lv.herokuapp.com/api/booking/${id}/cancel`);
+    await message.success("Deleted");
+  };
 
   useEffect(() => {
     form.setFieldsValue({
@@ -294,15 +314,18 @@ export const Account = () => {
             </Tabs.TabPane>
             <Tabs.TabPane tab="History" key="3">
               <Row gutter={[16, 16]}>
-                {history.map((item) => {
-                  return (
+                {booking.map((item) => {
+                  return item.bookingStatus === "cancelled" ? (
+                    ""
+                  ) : (
                     <Card
                       title={`Room ${item.room.name}`}
                       style={{ width: 300, marginLeft: 20 }}
                     >
                       <p>
                         Start booking :
-                        {moment(item.bookingStart).format("DD MM YYYY")}
+                        {moment(item.bookingStart).format("DD MM YYYY")}{" "}
+                        {item.name}
                       </p>
                       <p>
                         End booking :
@@ -312,6 +335,9 @@ export const Account = () => {
                         status :
                         {item.bookingStatus === "pending" ? "Booked" : ""}
                       </p>
+                      <Button danger onClick={() => deleteBooking(item._id)}>
+                        Delete
+                      </Button>
                     </Card>
                   );
                 })}
