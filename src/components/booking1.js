@@ -90,8 +90,8 @@ export const Booking = ({ hotel, room }) => {
       const data = {
         room: selected._id,
         customer: user._id,
-        bookingStart: moment(selectedDate.startDate).format(["DD-MM-YYYY"]),
-        bookingEnd: moment(selectedDate.endDate).format(["DD-MM-YYYY"]),
+        bookingStart: moment(selectedDate.startDate).format("DD-MM-YYYY"),
+        bookingEnd: moment(selectedDate.endDate).format("DD-MM-YYYY"),
         voucher: selectedVoucher._id,
         totalMoney: roomPrice,
       };
@@ -109,8 +109,8 @@ export const Booking = ({ hotel, room }) => {
       const data = {
         room: selected._id,
         customer: user._id,
-        bookingStart: moment(selectedDate.startDate).format(["DD-MM-YYYY"]),
-        bookingEnd: moment(selectedDate.endDate).format(["DD-MM-YYYY"]),
+        bookingStart: moment(selectedDate.startDate).format("DD-MM-YYYY"),
+        bookingEnd: moment(selectedDate.endDate).format("DD-MM-YYYY"),
         totalMoney: roomPrice,
       };
       const createBooking = async () => {
