@@ -23,6 +23,7 @@ export const BlogItem = () => {
   const [post, setPost] = useState({ data: {}, route: "" });
 
   useEffect(() => {
+    console.log(id)
     const fetchPost = async () => {
       const re = await getRequest("blog", {}, [id]);
       if (!re.success) {
@@ -32,6 +33,7 @@ export const BlogItem = () => {
         setPost(re.result);
       }
     };
+
     if (!post._id) {
       fetchPost();
     }
@@ -49,12 +51,12 @@ export const BlogItem = () => {
             "dddd, MMMM Do YYYY, h:mm:ss a"
           )}
         />
-        <Row>
-          <Col span={18} style={{ marginRight: 10 }}>
+        <Row gutter={[16,16]}>
+          <Col span={18}>
             <img className="img-post" src={post.img} alt="img-post" />
             <p className="content-blog">{post.content}</p>
           </Col>
-          <Col span={5}>
+          <Col span={6}>
             <p
               style={{
                 fontSize: "15px",

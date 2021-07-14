@@ -17,7 +17,7 @@ export const Blog = () => {
     if (res.success) {
       setState({
         behavior: "stall",
-        data: res.result,
+        data: res.result.blogs,
       });
     }
   };

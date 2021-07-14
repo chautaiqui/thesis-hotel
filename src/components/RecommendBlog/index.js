@@ -9,11 +9,10 @@ const RecommendBlog = () => {
   useEffect(() => {
     const getBlogs = async () => {
       const res = await getRequest("blog");
-      setBlogs(res.result);
+      setBlogs(res.result.blogs);
     };
     getBlogs();
   }, []);
-  console.log({ blogs });
   return (
     <List
       itemLayout="horizontal"
