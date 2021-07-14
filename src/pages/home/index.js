@@ -38,7 +38,7 @@ export const Home = () => {
       const res1 = await getRequest("blog");
       const res2 = await getRequest("voucher/available");
       setData({
-        blog: res1.result,
+        blog: res1.result.blogs,
         voucher: res2.result.vouchers,
       });
     };

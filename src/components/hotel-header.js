@@ -83,7 +83,10 @@ export const HotelHeader = ({ hotel }) => {
             className="hotel-header-back"
           />
         </div>
-        <Row gutter={[16, 16]} className="draw-detail-img">
+        <Row>
+          <Col span={16} offset={4}>
+          <Row gutter={[16, 16]} >
+          
           {imgs &&
             imgs.map((item, index) => {
               return (
@@ -97,6 +100,9 @@ export const HotelHeader = ({ hotel }) => {
               );
             })}
         </Row>
+          </Col>
+        </Row>
+        
       </Drawer>
     </>
   );
