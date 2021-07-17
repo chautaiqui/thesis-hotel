@@ -168,17 +168,25 @@ export const Hotel = () => {
         {lstHotel.length !== 0 ? (
           lstHotel.map((item, index) => {
             return (
-              <Col key={index} xs={24} sm={24} md={24} lg={24} xl={12}>
-                <HotelItem
-                  name={item.name}
-                  address={`${item.street}, ${item.ward}, ${item.district}, ${item.province}`}
-                  rate={item.rated.avgValue}
-                  price={item.averagePrice.avgValue}
-                  img={item.imgs[0]}
+              // <Col key={index} xs={24} sm={24} md={24} lg={24} xl={12}>
+              //   <HotelItem
+              //     name={item.name}
+              //     address={`${item.street}, ${item.ward}, ${item.district}, ${item.province}`}
+              //     rate={item.rated.avgValue}
+              //     price={item.averagePrice.avgValue}
+              //     img={item.imgs[0]}
+              //     redirect={() => {
+              //       hotelClick(item);
+              //     }}
+              //     description={item.description}
+              //   />
+              // </Col>
+              <Col xs={24} sm={12} md={12} lg={12} key={index}>
+                <HotelItem 
+                  hotel={item}
                   redirect={() => {
                     hotelClick(item);
                   }}
-                  description={item.description}
                 />
               </Col>
             );
@@ -201,16 +209,22 @@ export const Hotel = () => {
           </Col>
         )}
       </Row>
-      {lstHotel.length !== 0 && (
-        <Pagination
-          style={{ display: "flex", justifyContent: "center", marginTop: 10 }}
-          defaultCurrent={1}
-          total={lstHotel.length}
-          onChange={(page) => {
-            console.log(page);
-          }}
-        />
-      )}
+      <Pagination
+        disabled={lstHotel.length === 0}
+        current={1}
+        pageSize={10}
+        pageSizeOptions={[5,10,20]}
+        total={20}
+        showSizeChanger={true}
+        showTotal={total => `Total ${total} hotels`}
+        onChange={function(page, pageSize) {
+          // dispatch({type: 'PAGINATION', query: { ...state.query, page: page, pageSize: pageSize}, total: state.total })
+        }}
+        onShowSizeChange={function(current, size) {
+          // dispatch({type: 'PAGINATION', query: { ...state.query, page: current, pageSize: size}, total: state.total })
+        }}
+        style={{display: 'flex',justifyContent: 'center',marginTop: 10, paddingBottom: 30}}
+      />
     </>
   );
 };
