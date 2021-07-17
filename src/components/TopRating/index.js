@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "antd";
-
+import Slider from "react-slick";
 import "./styles.scss";
 import { getRequest } from "../../pkg/api";
 
@@ -14,13 +14,52 @@ const TopRating = () => {
     getHotels();
     // eslint-disable-next-line
   }, []);
-
+  var settings = {
+    dots: true,
+    infinite: true,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    swipeToSlide: true,
+    responsive: [
+      {
+        breakpoint: 1300,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          initialSlide: 0,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 950,
+        settings: {
+          initialSlide: 0,
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          initialSlide: 0,
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
   return (
     <Row gutter={[16, 16]}>
-      {hotels.map((item, index) => {
+      {/* {hotels.map((item, index) => {
         if (index < 6) {
           return (
-            <Col span={4} sm={8} lg={4} xs={24} md={8} xl={4}>
+            <Col xs={} sm={} md={} lg={} xl={4}>
               <Card
                 key={index}
                 img={item.imgs[0]}
@@ -33,7 +72,24 @@ const TopRating = () => {
             </Col>
           );
         }
-      })}
+      })} */}
+      <Col span={24}>
+        <Slider {...settings}>
+          {
+            hotels.map((item, index)=>(
+              <Card
+                key={index}
+                img={item.imgs[0]}
+                avgValue={item.averagePrice.avgValue}
+                rated={item.rated.avgValue}
+                hotelName={item.name}
+                id={item._id}
+                amountRating={item.rated.amount}
+              />
+            ))
+          }
+        </Slider>
+      </Col>
     </Row>
   );
 };
