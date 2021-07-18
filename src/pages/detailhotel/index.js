@@ -11,11 +11,12 @@ import ReviewRating from "../../components/ReviewRating";
 import "./detailhotel.style.css";
 
 export const DetailHotel = (props) => {
-  const [user] = useContext(User.context);
+  const [ user, dispatch ] = useContext(User.context);
   const { id } = useParams();
   const [hotel, setHotel] = useState({});
   const [room, setRoom] = useState([]);
-
+  const [ updateHotel, setUpdateHotel ] = useState(false);
+  
   useEffect(() => {
     const fetchPost = async () => {
       const re = await getRequest("hotel", {}, [id]);
@@ -26,11 +27,12 @@ export const DetailHotel = (props) => {
         setHotel(re.result);
       }
     };
-    if (!hotel._id) {
-      fetchPost();
-    }
+    // if (!hotel._id) {
+    // }
+    fetchPost();
     // eslint-disable-next-line
-  }, [id]);
+  }, [id, updateHotel]);
+
 
   useEffect(() => {
     const fetchRoom = async () => {
@@ -49,11 +51,16 @@ export const DetailHotel = (props) => {
     // eslint-disable-next-line
   }, [hotel]);
 
+  const actionChangeHotel = () => {
+    console.log('action')
+    setUpdateHotel(!updateHotel);
+  }
+  console.log(updateHotel);
   return (
     <>
       {id ? (
         <div>
-          <HotelHeader hotel={hotel} />
+          <HotelHeader hotel={hotel} user={user._id ? {login: true, _id: user._id} : {login: false, _id: ""}} update={actionChangeHotel}/>
           <div style={{ marginTop: 20 }}>
             {/* <h1 style={{ fontWeight: "bolder" }}>{hotel.name}</h1> */}
             <div className="detail-decr">
@@ -85,7 +92,7 @@ export const DetailHotel = (props) => {
               </h3>
             </div>
           </div>
-          <Booking hotel={hotel} room={room} />
+          {/* <Booking hotel={hotel} room={room} />
           <Divider>Review</Divider>
 
           <Row gutter={[16, 16]}>
@@ -95,7 +102,7 @@ export const DetailHotel = (props) => {
             <Col span={12}>
               <ReviewRating hotelId={hotel._id} />
             </Col>
-          </Row>
+          </Row> */}
         </div>
       ) : (
         <h1>Page not found</h1>

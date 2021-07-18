@@ -16,3 +16,27 @@
   max-width: 40px;
   cursor: pointer;
 }
+.hotel-header-close {
+  max-width: 30px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 1px solid;
+  padding: 5px;
+}
+.box-rating {
+  display: flex;
+}
+.box-rating .ant-drawer-content-wrapper {
+  border-radius: 20px !important;
+}
+.box-rating .ant-drawer-content {
+  border-radius: 20px !important;
+}
+.box-rating .ant-drawer-mask {
+  /* background-color: #fff !important; */
+  display: none !important;
+}
+.btn-rating {
+  box-shadow: 0px 1px 3px 0px #000000 !important;
+  border-radius: 5px !important;
+}
