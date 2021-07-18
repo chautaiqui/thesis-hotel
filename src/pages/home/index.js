@@ -101,6 +101,19 @@ export const Home = () => {
         </div>
         {/* <img src={urlimg} alt='br' className="img-br"/> */}
       </div>
+
+
+      <Divider orientation="left" plain>
+        <h1>Browse by location</h1>
+      </Divider>
+      <CarouselCus search={search} />
+      
+
+      <Divider orientation="left" plain>
+        <h1>Top Hotel</h1>
+      </Divider>
+      <TopRating />
+
       <Divider orientation="left" plain>
         <h1>Voucher</h1>
       </Divider>
@@ -113,14 +126,7 @@ export const Home = () => {
         data={data.voucher}
         style={{ width: "100%", height: "230px" }}
       />
-      <Divider orientation="left" plain>
-        <h1>Browse by location</h1>
-      </Divider>
-      <CarouselCus search={search} />
-      <Divider orientation="left" plain>
-        <h1>Top Hotel</h1>
-      </Divider>
-      <TopRating />
+
       <Divider orientation="left" plain>
         <h1>Get inspiration for your next trip</h1>
       </Divider>

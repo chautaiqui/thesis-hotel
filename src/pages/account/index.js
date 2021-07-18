@@ -87,7 +87,7 @@ export const Account = () => {
         setHistory(re.result.bookings);
       }
     };
-    fetchHistory();
+    // fetchHistory();
     // eslint-disable-next-line
   }, [booking]);
 
