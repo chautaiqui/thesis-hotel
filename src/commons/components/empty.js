@@ -19,3 +19,20 @@ export const CustomEmpty = (props) => {
     <Spin indicator={antIcon} />
   </Empty>
 }
+
+export const CustomEmptyData = (props) => {
+  const { title, content } = props;
+  return <Empty
+    image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+    imageStyle={{
+      height: 60,
+    }}
+    description={
+      <span>
+        {title}
+      </span>
+    }
+  >
+    {content}
+  </Empty>
+}

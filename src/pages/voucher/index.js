@@ -7,6 +7,7 @@ import { VoucherItem } from '../../components/voucher-item';
 import { Row, Col } from 'antd';
 
 import './voucher.style.css';
+import { CustomEmpty, CustomEmptyData } from '../../commons/components/empty';
 
 const initState = {
 	behavior: 'init',
@@ -36,7 +37,6 @@ export const Voucher = () => {
 		}
 	}, [state]);
 	const getVoucher = (voucher) => {
-		console.log(voucher, user);
 		if (user._id) {
 			// get voucher
 			const get = async () => {
@@ -62,25 +62,28 @@ export const Voucher = () => {
 			);
 		}
 	};
-	return (
-		<Row gutter={[16, 16]} style={{ marginTop: 10 }}>
-			{state.data.map((item, index) => {
-				return (
-					<Col key={index} xs={24} sm={12} md={12} lg={12} xl={12}>
-						<VoucherItem
-							hotel={item.hotel.name}
-							getVoucher={getVoucher}
-							voucher={item}
-							discount={item.discount}
-							discountLimit={item.discountLimit}
-							roomType={item.roomType.name}
-							endDate={moment(item.endDate).format('DD-MM-YYYY')}
-						/>
-					</Col>
-				);
-			})}
-		</Row>
-	);
+	return <>
+		{
+			state.behavior === 'init' && <CustomEmpty title={"Loading"}/>
+		}
+		{
+			(state.behavior === 'stall' && state.data.length === 0) && <CustomEmptyData title="No voucher" content="No voucher available in this time"/>
+		}
+		{
+			(state.behavior === 'stall' && state.data.length !== 0) && <Row gutter={[16, 16]} style={{ marginTop: 10 }}>
+				{state.data.map((item, index) => {
+					return (
+						<Col key={index} xs={24} sm={12}>
+							<VoucherItem
+								getVoucher={getVoucher}
+								voucher={item}
+							/>
+						</Col>
+					);
+				})}
+			</Row>
+		}
+	</>
 };
 
 export const VoucherList = (props) => {

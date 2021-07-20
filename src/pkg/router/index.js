@@ -18,13 +18,13 @@ const RouterContainer = (props) => {
   const [_user, dispatchUser] = useContext(User.context);
   const [check, setCheck] = useState(false);
   const isLogin = props.guest ? false : true;
-  console.log("is login: ", isLogin);
-  console.log("user", _user);
+  // console.log("is login: ", isLogin);
+  // console.log("user", _user);
 
   useEffect(() => {
     const { email, api_token } = localStorage;
     const checkUser = async () => {
-      console.log("chcek");
+      // console.log("check");
       try {
         const res = await postRequest("customer/login", {
           email: email,
@@ -47,10 +47,10 @@ const RouterContainer = (props) => {
         setCheck(true);
       }
     };
-    console.log("local storage", check, email, api_token);
+    // console.log("local storage", check, email, api_token);
     if (!check) {
       if (email && api_token) {
-        console.log("call check");
+        // console.log("call check");
         checkUser();
       } else setCheck(true);
     }

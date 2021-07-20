@@ -1,3 +1,8 @@
 .custom-input {
   margin: 0 !important;
 }
+
+.btn-update {
+  box-shadow: 0px 1px 3px 0px #000000 !important;
+  border-radius: 5px !important;
+}

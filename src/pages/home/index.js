@@ -4,17 +4,19 @@ import { CarouselCus } from "../../components/carousel";
 import { Form, Input, Button, Row, Col, Divider } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import "./home.style.css";
+// import { BlogItem } from "../../components/BlogItems";
 import { BlogItem } from "../../components/BlogItems/blog-item";
 import { getRequest } from "../../pkg/api";
 import { VoucherList } from "../voucher";
 import TopRating from "../../components/TopRating";
+import { CustomEmpty } from "../../commons/components/empty";
 
 export const Home = () => {
   const history = useHistory();
   const search = (param) => {
     history.push(param);
   };
-  const [data, setData] = useState({ blog: [], voucher: [] });
+  const [data, setData] = useState({ blog: [], voucher: [], loading: true });
   const onFinish = (values) => {
     console.log(values);
     if (values.location && values.capacity) {
@@ -35,17 +37,18 @@ export const Home = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const res1 = await getRequest("blog");
+      const res1 = await getRequest("blog/view-count" ,{ limit: 3});
       const res2 = await getRequest("voucher/available");
       setData({
-        blog: res1.result.blogs,
+        blog: res1.result,
         voucher: res2.result.vouchers,
+        loading: false
       });
     };
     getData();
   }, []);
   return (
-    <div>
+    data.loading ? <CustomEmpty title="loading"/>: <div>
       <Divider orientation="left" plain>
         <h1>Where will you travel next?</h1>
       </Divider>
@@ -118,7 +121,7 @@ export const Home = () => {
         <h1>Voucher</h1>
       </Divider>
       <div>
-        <a href="/voucher" className="view-more-blog" target="_blank">
+        <a href="/voucher" className="view-more-blog">
           View more
         </a>
       </div>
@@ -133,6 +136,7 @@ export const Home = () => {
       <a href="/blog" className="view-more-blog">
         View more
       </a>
+      {/* <BlogItem blog={data.blog} search={search} /> */}
       <BlogItem blog={data.blog} search={search} />
       {/* <Blogs blog={data.blog} search={search} /> */}
     </div>
