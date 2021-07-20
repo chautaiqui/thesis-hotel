@@ -15,7 +15,7 @@ const initState = {
 };
 export const Voucher = () => {
 	const [state, setState] = useState(initState);
-	const [user] = useContext(User.context);
+	const [user, dispatch] = useContext(User.context);
 	const getData = async () => {
 		const res = await getRequest('voucher/available');
 		if (res.success) {
@@ -48,8 +48,18 @@ export const Voucher = () => {
 						'Success',
 						'Get voucher successfully! Please check voucher in account information.'
 					);
+					const new_voucher = res.result;
+					console.log({
+						...user, voucher: [...user.voucher, new_voucher]
+					})
+					console.log('----', new_voucher)
+					dispatch({
+						type: 'UPDATE', user: {
+							...user, voucher: [...user.voucher, new_voucher]
+						}
+					})
+					
 				} else {
-					console.log('error', typeof res.error);
 					messageError('Get voucher error', res.error);
 				}
 			};

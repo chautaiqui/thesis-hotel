@@ -19,7 +19,7 @@ const RouterContainer = (props) => {
   const [check, setCheck] = useState(false);
   const isLogin = props.guest ? false : true;
   // console.log("is login: ", isLogin);
-  // console.log("user", _user);
+  console.log("user", _user);
 
   useEffect(() => {
     const { email, api_token } = localStorage;

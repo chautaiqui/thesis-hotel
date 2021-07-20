@@ -1,6 +1,8 @@
 @import '~antd/dist/antd.css';
 @import "~slick-carousel/slick/slick.css"; 
 @import "~slick-carousel/slick/slick-theme.css";
+@import '~rsuite/dist/styles/rsuite-default.css';
+
 .App {
   text-align: center;
 }

@@ -1,70 +1,104 @@
 import { message, Select } from "antd";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { getRequest } from "../../pkg/api";
 import { Row, Col, Pagination, Button, Form, Input, Empty } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { HotelItem } from "../../components/hotel-item";
 import "./hotel.style.scss";
+import { messageError } from "../../commons";
+import { CustomEmpty } from "../../commons/components/empty";
+import { Filter } from "./filter";
 
 // const url =
 // "https://res.cloudinary.com/hotellv/image/upload/v1621233855/tmsvnhfbf7vcmks132jy.jpg";
+const { Option } = Select;
+
+const HotelReducer = (state, action) => {
+  switch (action.type) {
+		case 'GET_DATA_SUCCESS':
+			return { ...state, data: action.data, query: action.query, total: action.total, behavior: 'stall' }
+		case 'GET_DATA_ERROR':
+			return { ...state, data: [], behavior: 'stall' };
+		case 'PAGINATION': 
+			return { ...state, query: action.query, total: action.total, behavior: 'init'}
+		case 'RELOAD':
+			return { ...state, behavior: 'init', popup: action.popup };
+		default:
+		return state;
+  } 
+}
+const initState = {
+	behavior: 'init',
+	data: [],
+	query: { page: 1, pageSize: 10},
+	total: undefined
+}
 
 export const Hotel = () => {
   var location = useLocation();
   const history = useHistory();
-  const [lstHotel, setLstHotel] = useState([]);
+  const [ state, dispatch ] = useReducer(HotelReducer, initState);
   const [form] = Form.useForm();
-  const { Option } = Select;
-  var param = location.search
-    .slice(1)
-    .split("&")
-    .reduce(
-      (r, i) => Object.assign({}, r, { [i.split("=")[0]]: i.split("=")[1] }),
-      {}
-    );
-  const [query, setQuery] = useState(param);
 
+  useEffect(()=>{
+    var param = location.search
+      .slice(1)
+      .split("&")
+      .reduce(
+        (r, i) => Object.assign({}, r, { [i.split("=")[0]]: i.split("=")[1] }),
+        {}
+      );
+      dispatch({
+        type: "PAGINATION", query: { ...param, ...state.query}, total: undefined
+      })
+  },[])
   useEffect(() => {
-    console.log(query);
-    form.setFieldsValue(query);
+    // console.log(query);
+    // form.setFieldsValue(query);
     const params = [];
-    for (const [key, value] of Object.entries(query)) {
-      if (query[key]) params.push(`${key}=${value}`);
+    for (const [key, value] of Object.entries(state.query)) {
+      if (state.query[key]) params.push(`${key}=${value}`);
     }
     history.push({
       path: "hotel",
       search: `?${params.join("&")}`,
     });
+    console.log(params.join("&"))
     const getHotel = async () => {
-      const res = await getRequest("hotel", query);
+      const res = await getRequest("hotel", state.query);
       if (res.success) {
-        setLstHotel(res.result.hotels);
+        // setLstHotel({ behavior: "stall", data: res.result.hotels, total: res.totalPages});
+        dispatch({
+          type: 'GET_DATA_SUCCESS', data: res.result.hotels, total: res.result.totalItems, 
+          query: {...state.query, page: res.result.currentPage, pageSize: res.result.pageSize}
+        })
       } else {
-        message.error(res.error);
+        messageError("Error", res.error);
       }
     };
-    getHotel();
+    if(state.behavior === 'init') getHotel();
     // eslint-disable-next-line
-  }, [query]);
+  }, [state]);
+
   const hotelClick = (item) => {
     history.push(`/hotel/${item._id}`);
   };
   const onFinish = (value) => {
-    setQuery(value);
+    // setQuery(value);
   };
 
   const onFix = (v) => {
-    setQuery({ ...query, conveniences: v.join(",") });
+    // setQuery({ ...query, conveniences: v.join(",") });
   };
 
   const onRate = (v) => {
-    setQuery({ ...query, bookingRating: v });
+    // setQuery({ ...query, bookingRating: v });
   };
-
+  console.log(state)
   return (
     <>
-      <div className="hotel-filter">
+      {/* <div className="hotel-filter">
         <Form name="search-filter" form={form} onFinish={onFinish}>
           <Row gutter={24}>
             <Col xs={24} sm={7} md={7} lg={6} xl={7}>
@@ -163,25 +197,13 @@ export const Hotel = () => {
             </Col>
           </Row>
         </Form>
-      </div>
+      </div> */}
+      <Filter />
       <Row gutter={[16, 16]} style={{ marginTop: 50 }}>
-        {lstHotel.length !== 0 ? (
-          lstHotel.map((item, index) => {
+        {state.data.length !== 0 ? (
+          state.data.map((item, index) => {
             return (
-              // <Col key={index} xs={24} sm={24} md={24} lg={24} xl={12}>
-              //   <HotelItem
-              //     name={item.name}
-              //     address={`${item.street}, ${item.ward}, ${item.district}, ${item.province}`}
-              //     rate={item.rated.avgValue}
-              //     price={item.averagePrice.avgValue}
-              //     img={item.imgs[0]}
-              //     redirect={() => {
-              //       hotelClick(item);
-              //     }}
-              //     description={item.description}
-              //   />
-              // </Col>
-              <Col xs={24} sm={12} md={12} lg={12} key={index}>
+              <Col xs={24} sm={24} md={12} lg={12} key={index}>
                 <HotelItem 
                   hotel={item}
                   redirect={() => {
@@ -193,6 +215,11 @@ export const Hotel = () => {
           })
         ) : (
           <Col span={24} style={{ marginBottom: 150 }}>
+            <CustomEmpty title="Loading"/>
+          </Col>
+        )}
+        {
+          state.behavior === 'stall' && state.data.length === 0 && <Col span={24} style={{ marginBottom: 150 }}>
             <Empty
               image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
               imageStyle={{
@@ -207,23 +234,23 @@ export const Hotel = () => {
               <h1>No hotels found</h1>
             </Empty>
           </Col>
-        )}
+        }
       </Row>
       <Pagination
-        disabled={lstHotel.length === 0}
-        current={1}
-        pageSize={10}
+        disabled={state.data.length === 0 && state.behavior === 'stall'}
+        current={state.query.page || 1}
+        pageSize={state.query.pageSize || 1}
         pageSizeOptions={[5,10,20]}
-        total={20}
+        total={state.total || 10}
         showSizeChanger={true}
         showTotal={total => `Total ${total} hotels`}
         onChange={function(page, pageSize) {
-          // dispatch({type: 'PAGINATION', query: { ...state.query, page: page, pageSize: pageSize}, total: state.total })
+          dispatch({type: 'PAGINATION', query: { ...state.query, page: page, pageSize: pageSize}, total: state.total })
         }}
         onShowSizeChange={function(current, size) {
-          // dispatch({type: 'PAGINATION', query: { ...state.query, page: current, pageSize: size}, total: state.total })
+          dispatch({type: 'PAGINATION', query: { ...state.query, page: current, pageSize: size}, total: state.total })
         }}
-        style={{display: 'flex',justifyContent: 'center',marginTop: 10, paddingBottom: 30}}
+        style={{display: 'flex',justifyContent: 'center',marginTop: 50}}
       />
     </>
   );
