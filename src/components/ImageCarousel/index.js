@@ -1,7 +1,7 @@
 import React, { useRef} from 'react';
 import { Carousel, Row, Col, Button } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import { useState } from 'react/cjs/react.development';
+import { useState } from 'react';
 
 export const ImageCarousel = (props) => {
   var carousel = useRef(null);
