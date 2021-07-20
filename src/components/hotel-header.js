@@ -167,21 +167,21 @@ export const HotelHeader = ({ hotel, user, update = () => {} }) => {
       </Drawer>
       
       <Drawer
-        placement={"bottom"}
+        placement={"right"}
         closable={false}
         onClose={() => {
           setState({...state, open: false});
         }}
         visible={state.open}
-        height={"100%"}
+        width={"50%"}
         key={"rating"}
         className="box-rating"
-        style={{
-          width: '80%',
-          top: '20%',
-          left: '10%',
-          height: 500
-        }}
+        // style={{
+        //   width: '80%',
+        //   top: '20%',
+        //   left: '10%',
+        //   height: 500
+        // }}
       >
         <div
           onClick={() => {

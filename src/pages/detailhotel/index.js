@@ -52,10 +52,8 @@ export const DetailHotel = (props) => {
   }, [hotel]);
 
   const actionChangeHotel = () => {
-    console.log('action')
     setUpdateHotel(!updateHotel);
   }
-  console.log(updateHotel);
   return (
     <>
       {id ? (
