@@ -5,28 +5,25 @@ import "./styles.css";
 const Footer = () => (
   <footer>
     <div className="sm-handle">
-      <a href="https://instagram.com/ronakgiriraj" className="sm-button">
+      <a href="#" className="sm-button">
         <i className="fab fa-instagram"> </i>
       </a>
 
       <a
-        href="https://www.linkedin.com/in/giri-raj-ronak-999257212"
+        href="#"
         className="sm-button"
       >
         <i className="fab fa-linkedin"> </i>
       </a>
 
-      <a href="https://facebook.com/giriraj.ronak" className="sm-button">
+      <a href="#" className="sm-button">
         <i className="fab fa-facebook-f"> </i>
       </a>
 
-      <a href="https://twitter.com/2Teching" className="sm-button">
+      <a href="#" className="sm-button">
         <i className="fab fa-twitter"> </i>
       </a>
 
-      <a href="https://github.com/ronakgiriraj" className="sm-button">
-        <i className="fab fa-github"> </i>
-      </a>
     </div>
 
     <div className="footer-links">

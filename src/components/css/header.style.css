@@ -34,9 +34,9 @@ nav {
   text-align: center;
   cursor: pointer;
 }
-.active {
+/* .active {
   border: 1px solid firebrick;
-}
+} */
 
 a {
   margin-left: 15px;

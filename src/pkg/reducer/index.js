@@ -9,7 +9,7 @@ const UserProvider = ({ children }) => {
         (action.email && localStorage.setItem('email', action.email));
         (action.api_token && localStorage.setItem('api_token', action.api_token));
         const _u = action.user || {};
-        console.log(_u)
+        // console.log(_u)
         return _u;
       case 'UPDATE':
         return action.user
