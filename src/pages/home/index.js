@@ -32,7 +32,8 @@ export const Home = () => {
     if (values.capacity) {
       search(`/hotel?capacity=${values.capacity}`);
       return;
-    }
+    } 
+    search('/hotel')
   };
 
   useEffect(() => {

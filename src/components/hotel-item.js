@@ -39,16 +39,14 @@ export const HotelItem = (props) => {
     //     <p className="rating">{}</p>
     //   </div>
     // </div>
-    <Row gutter={[16,16]} style={{margin: "5px 0px 5px", borderRadius: 10}} onClick={redirect}>
+    <Row gutter={[16,16]} onClick={redirect}>
       <Col span={12}>
         <ImageCarousel img={hotel.imgs.length !== 0 ? hotel.imgs : defaulfHotel.imgs}/>
       </Col>
       <Col span={12}>
         <Row gutter={[16,0]}>
-          <Col span={24}>
-            <h1>
-              {hotel.name}
-            </h1>
+          <Col span={24} style={{fontSize: "x-large",fontWeight: 600}}>
+            {hotel.name}
           </Col>
           <Col span={24}>
             <span>{hotel.address}</span>

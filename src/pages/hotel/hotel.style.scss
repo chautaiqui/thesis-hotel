@@ -2,3 +2,26 @@
   display: flex;
   justify-content: center;
 }
+ul.rs-dropdown-menu {
+  z-index: 100 !important;
+}
+.star-select ul {
+  width: 100%;
+}
+.star-select a {
+  text-align: center;
+}
+
+.rs-input-number-btn-group-vertical {
+  display: none !important;
+}
+.rs-form-control-wrapper > input {
+  text-align: center;
+}
+.rs-input-group > input {
+  text-align: center;
+}
+.btn-apple {
+  box-shadow: 0px 1px 3px 0px #000000 !important;
+  border-radius: 5px !important;
+}
