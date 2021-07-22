@@ -82,8 +82,8 @@ export const HotelHeader = ({ hotel, user, update = () => {} }) => {
           alt="hinh"
           className="hotel-header-star"
         />
-        <ins>{rated ? rated.avgValue + " rated" : "5 rated"}</ins>
-        <a href="#">Có {rated ? rated.amount : ""} bài đánh giá</a>
+        <ins>{rated ? rated.avgValue.toFixed(1) + " rated" : "5 rated"}</ins>
+        <a href="#">{rated ? rated.amount : ""} Reviews</a>
       </p>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12} onClick={viewDetail}>

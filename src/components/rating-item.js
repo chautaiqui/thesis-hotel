@@ -5,7 +5,7 @@ import moment from 'moment';
 export const RatingItem = ({rate}) => {
   const { comment, rating, customer, updatedAt } = rate;
   return (
-    <Row gutter={[0,0]} style={{marginBottom: 30}}>
+    <Row gutter={[0,0]} style={{marginBottom: 30, paddingBottom: 15, borderBottom: "1px solid"}}>
       <Col span={4}>
         <Avatar size={"large"} src={customer.img} style={{maxWidth: "100%"}}/>
       </Col>

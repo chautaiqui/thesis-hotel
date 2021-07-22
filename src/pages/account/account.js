@@ -7,7 +7,7 @@ import { History } from './history';
 export const AccountContent = (props) => {
   const  { keyItem, user } = props;
   
-  return <>
+  return <div>
   {
     keyItem === 1 && <Information/>
   }
@@ -20,5 +20,5 @@ export const AccountContent = (props) => {
   {
     keyItem === 4 && <Voucher voucher={user.voucher}/>
   }
-  </>
+  </div>
 }
