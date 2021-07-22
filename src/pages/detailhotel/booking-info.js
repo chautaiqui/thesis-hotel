@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Select } from 'antd';
 import "./detailhotel.style.css";
 import { messageError, messageSuccess } from '../../commons';
-import { useEffect } from 'react/cjs/react.development';
 import { postMethod } from '../../pkg/api';
 
 export const BookingInfo = (props) => {
