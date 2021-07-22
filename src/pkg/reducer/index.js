@@ -9,10 +9,17 @@ const UserProvider = ({ children }) => {
         (action.email && localStorage.setItem('email', action.email));
         (action.api_token && localStorage.setItem('api_token', action.api_token));
         const _u = action.user || {};
+        _u.booked = false;
         // console.log(_u)
         return _u;
       case 'UPDATE':
-        return action.user
+        var t = action.user;
+        t.booked = false;
+        return t
+      case 'BOOKED':
+        var t = state;
+        t.booked = true;
+        return t
       case 'LOGOUT':
         localStorage.removeItem('email');
         localStorage.removeItem('api_token');

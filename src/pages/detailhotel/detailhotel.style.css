@@ -9,3 +9,55 @@
   cursor: pointer;
   color: dodgerblue;
 }
+.ant-collapse {
+  background-color: #fff !important;
+  border: none !important;
+}
+.ant-collapse > .ant-collapse-item {
+  border-bottom: none !important;
+}
+.ant-collapse-content {
+  border-top: none;
+}
+.show-collapse {
+  cursor: pointer;
+  color: #141414;
+}
+h4.ant-typography, .ant-typography h4 {
+  text-align: center;
+}
+
+.booking-info-pad {
+  padding: 20px;
+}
+.booking-info-pad-5 {
+  padding: 10px 10px 10px 20px;
+}
+.booking-info-pad-5-right {
+  /* padding: 10px 10px 10px 20px; */
+  float: right;
+}
+.btn-booking {
+  padding: 20px;
+  background: #40a9ff;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+.booking-border-left {
+  border-left: 1px solid;
+  padding: 5px;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.booking-border-right {
+  border: 1px solid;
+  padding: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.ant-select-item-option-content {
+  text-align: center;
+}
