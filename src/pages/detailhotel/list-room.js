@@ -1,8 +1,8 @@
-import React from 'react';
-import { Row, Col, Button } from 'antd';
+import React, { useState } from 'react';
+import { Row, Col } from 'antd';
 import './detail.style.scss';
 export const ListRoom = (props) => {
-  const { rooms = [], selectRoom = () => {}, style={} } = props;
+  const { rooms = [], selectRoom = () => {}, style={}, selected = {} } = props;
   return <Row gutter={[16,16]} style={style}>
     <Col span={24}>
       <RoomItem 
@@ -20,8 +20,11 @@ export const ListRoom = (props) => {
     </Col>
     {
       rooms.map((item, index)=> {
+        const check = selected.room._id ? (selected.room._id === item._id) : false;
         return <Col span={24} key={index}>
-          <RoomItem room={item} selectRoom={()=>selectRoom(item)}/>
+          <RoomItem room={item} selectRoom={()=>{
+            selectRoom(item);
+          }} selected={check}/>
         </Col>
       })
     }
@@ -29,8 +32,7 @@ export const ListRoom = (props) => {
 }
 
 const RoomItem = props => {
-  const { room, selectRoom = () => {}, style = {} } = props;
- 
+  const { room, selectRoom = () => {}, style = {}, selected = false } = props;
   return <Row style={style}>
     <Col span={5} style={{textAlign: 'center'}}>{room.name}</Col>
     <Col span={5} style={{textAlign: 'center'}}>{room.roomType.name}</Col>
@@ -44,6 +46,7 @@ const RoomItem = props => {
     { room._id && <Col span={4} onClick={selectRoom}>
       <div
         className="slide"
+        style={{background: selected ? "#69c0ff" : "#f0f0f0"}}
       >Select</div>
     </Col>}
   </Row>

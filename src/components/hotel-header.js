@@ -85,24 +85,25 @@ export const HotelHeader = ({ hotel, user, update = () => {} }) => {
         <ins>{rated ? rated.avgValue.toFixed(1) + " rated" : "5 rated"}</ins>
         <a href="#">{rated ? rated.amount : ""} Reviews</a>
       </p>
-      <Row gutter={[16, 16]}>
+      <Row gutter={[16, 16]} style={{marginTop: 5}}>
         <Col xs={24} sm={12} onClick={viewDetail}>
           <img
             src={imgs ? imgs[0] : default_img}
-            className="hotel-header-img-ele-left"
+            className="hotel-header-img-ele-left col-1-left"
             alt="ele"
           />
         </Col>
         <Col xs={24} sm={12}>
           {imgs && (
-            <Row gutter={[16, 16]}>
+            <Row gutter={[8, 8]}>
               {[1, 2, 3, 4].map((item) => {
+                var _c = item === 2 ? ' border-top-right' : (item === 4 ? " border-bottom-right" : "")
                 return (
                   <Col span={12} key={item} onClick={viewDetail}>
                     {imgs[item] && (
                       <img
                         src={imgs[item]}
-                        className="hotel-header-img-ele-left"
+                        className={"hotel-header-img-ele-left" + _c}
                         alt="ele"
                       />
                     )}

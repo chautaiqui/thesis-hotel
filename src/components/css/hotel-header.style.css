@@ -40,3 +40,12 @@
   box-shadow: 0px 1px 3px 0px #000000 !important;
   border-radius: 5px !important;
 }
+.col-1-left {
+  border-radius: 10px 0px 0px 10px;
+}
+.border-top-right {
+  border-radius: 0px 10px 0px 0px;
+}
+.border-bottom-right {
+  border-radius: 0px 0px 10px 0px;
+}
