@@ -25,3 +25,19 @@ ul.rs-dropdown-menu {
   box-shadow: 0px 1px 3px 0px #000000 !important;
   border-radius: 5px !important;
 }
+
+.filter-dropdown .rs-dropdown-toggle {
+  width: 100%;
+}
+.btn-filter {
+  width: 100%;
+  border: 1px solid !important;
+}
+.btn-close-center{
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.have-query {
+  background: #ffbb96 !important;
+}

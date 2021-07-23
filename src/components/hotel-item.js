@@ -52,7 +52,7 @@ export const HotelItem = (props) => {
             <span>{hotel.address}</span>
           </Col>
           <Col span={24}>
-            <Rate value={hotel.rated.avgValue}/>
+            <Rate value={hotel.rated.avgValue} disabled/>
           </Col>
           <Col span={24}>
             <span>
