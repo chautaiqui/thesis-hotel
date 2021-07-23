@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { Divider, message, Row, Col, Affix , Button} from "antd";
 
@@ -35,7 +35,6 @@ export const DetailHotel = (props) => {
     startDate: undefined,
     endDate: undefined
   })
-
   useEffect(() => {
     const fetchPost = async () => {
       const re = await getRequest("hotel", {}, [id]);
@@ -99,12 +98,19 @@ export const DetailHotel = (props) => {
   }
   const selectStartDate = (date) => {
     setSelected({
-      ...selected, startDate: date
+      ...selected, startDate: date, endDate: undefined
     })
   }
   const selectEndDate = (date) => {
     setSelected({
       ...selected, endDate: date
+    })
+  }
+  const clearBooking = () => {
+    setSelected({
+      room: {},
+      startDate: undefined,
+      endDate: undefined
     })
   }
   const flattenBookingDate = (bookings) => {
@@ -144,7 +150,7 @@ export const DetailHotel = (props) => {
       {!data.loading ? (
         <div>
           <HotelHeader hotel={hotel} user={user._id ? {login: true, _id: user._id} : {login: false, _id: ""}} update={actionChangeHotel}/>
-          <Row gutter={[16,16]} style={{marginTop: 20}}>
+          <Row gutter={[16,16]} style={{marginTop: 20}} >
             <Col span={16}>
               <h4>Description</h4>
               {
@@ -163,7 +169,10 @@ export const DetailHotel = (props) => {
                     border: "1px solid #DDDDDD",
                     boxShadow: "0px 6px 16px rgb(0 0 0 / 12%)"
                   }} 
-                  rooms={data.room} selectRoom={selectRoom}/>
+                  rooms={data.room} 
+                  selectRoom={selectRoom}
+                  selected={selected}
+                  />
                 }
                 <h4>Select Date</h4>
                 <Row gutter={[16,16]}>
@@ -207,7 +216,7 @@ export const DetailHotel = (props) => {
               <BookingReviews reviews={data.reviews}/>
             </Col>
             <Col span={8} style={{position: 'relative'}}>
-              <Affix offsetTop={120} >
+              <Affix offsetTop={10}>
                 <div style={{
                   width: "100%",
                   padding: 5,
@@ -215,11 +224,12 @@ export const DetailHotel = (props) => {
                   boxShadow: "0px 6px 16px rgb(0 0 0 / 12%)",
                   borderRadius: 10
                 }}>
-                  <BookingInfo data={selected} hotel={hotel} user={user} dispatch={dispatch}/>
-              </div>
+                  <BookingInfo data={selected} hotel={hotel} user={user} dispatch={dispatch} clearBooking={clearBooking}/>
+                </div>
               </Affix>
             </Col>
           </Row>
+          
           {/* <Booking hotel={hotel} room={room} />
           <Divider>Review</Divider>
 

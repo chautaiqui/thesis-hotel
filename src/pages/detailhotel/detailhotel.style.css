@@ -28,17 +28,17 @@ h4.ant-typography, .ant-typography h4 {
 }
 
 .booking-info-pad {
-  padding: 20px;
+  padding: 10px;
 }
 .booking-info-pad-5 {
-  padding: 10px 10px 10px 20px;
+  padding: 5px 10px 5px 10px;
 }
 .booking-info-pad-5-right {
   /* padding: 10px 10px 10px 20px; */
   float: right;
 }
 .btn-booking {
-  padding: 20px;
+  padding: 15px;
   background: #40a9ff;
   border-radius: 10px;
   text-align: center;
@@ -60,4 +60,8 @@ h4.ant-typography, .ant-typography h4 {
 }
 .ant-select-item-option-content {
   text-align: center;
+}
+.btn-clear-booking {
+  cursor: pointer;
+  float: right;
 }

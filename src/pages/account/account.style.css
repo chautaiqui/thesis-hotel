@@ -6,3 +6,11 @@
   box-shadow: 0px 1px 3px 0px #000000 !important;
   border-radius: 5px !important;
 }
+.btn-cancel-booking {
+  border-radius: 10px !important;
+  color: #ff4d4f !important;
+}
+.btn-cancel-booking:hover {
+  background: #ff4d4f !important;
+  color: #ffffff !important;
+}

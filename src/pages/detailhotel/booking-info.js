@@ -5,7 +5,7 @@ import { messageError, messageSuccess } from '../../commons';
 import { postMethod } from '../../pkg/api';
 
 export const BookingInfo = (props) => {
-  const { data, hotel, user, dispatch = () => {} } = props;
+  const { data, hotel, user, dispatch = () => {}, clearBooking = () => {} } = props;
   const { room, startDate, endDate } = data;
   const [ discount, setDiscount ] = useState(null);
   var complete = false;
@@ -103,13 +103,13 @@ export const BookingInfo = (props) => {
       } 
     </Col>
     { room._id && <Col span={24} className="booking-info-pad-5">
-    <strong>Room:</strong>{room.name}
+    <strong>Room: </strong>{room.name}
     </Col>}
     { room._id && <Col span={24} className="booking-info-pad-5">
-    <strong>Room type:</strong> {room.roomType.name}
+    <strong>Room type: </strong> {room.roomType.name}
     </Col>}
     { room._id && <Col span={24} className="booking-info-pad-5">
-    <strong>Capacity:</strong> {room.roomType.capacity}
+    <strong>Capacity: </strong> {room.roomType.capacity}
     </Col>}
     <Col span={24} className="booking-info-pad-5">
         <Row>
@@ -121,7 +121,7 @@ export const BookingInfo = (props) => {
             {end}</Col>
         </Row>
     </Col>
-    { room._id && startDate && endDate && <Col span={24} className="booking-info-pad-5">
+    { user._id && room._id && startDate && endDate && <Col span={24} className="booking-info-pad-5">
       <strong>Voucher:</strong> <Select
         // style={{ width: "100%" }}
         placeholder="Select a voucher"
@@ -165,5 +165,10 @@ export const BookingInfo = (props) => {
         <strong>Booking</strong>
       </div>
     </Col>
+    {user._id && room._id && <Col span={24} className="booking-info-pad-5">
+      <div className="btn-clear-booking" onClick={clearBooking}>
+        <strong>Clear</strong>
+      </div>
+    </Col>}
   </Row>
 }
