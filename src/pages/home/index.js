@@ -14,7 +14,12 @@ import { CustomEmpty } from "../../commons/components/empty";
 export const Home = () => {
   const history = useHistory();
   const search = (param) => {
-    history.push(param);
+    // history.push(param);
+    history.push({
+      path: "hotel",
+      search: param,
+    });
+    window.location.href = param;
   };
   const [data, setData] = useState({ blog: [], voucher: [], loading: true });
   const onFinish = (values) => {
@@ -35,7 +40,9 @@ export const Home = () => {
     } 
     search('/hotel')
   };
-
+  const exploreClick = () => {
+    window.location.href = "/hotel";
+  }
   useEffect(() => {
     const getData = async () => {
       const res1 = await getRequest("blog/view-count" ,{ limit: 3});
@@ -46,12 +53,12 @@ export const Home = () => {
         loading: false
       });
     };
-    getData();
+    return getData();
   }, []);
   return (
     data.loading ? <CustomEmpty title="loading"/>: <div>
       <Divider orientation="left" plain>
-        <h1>Where will you travel next?</h1>
+        <h3>Where will you travel next?</h3>
       </Divider>
       <div className="br-homepage">
         <div className="content">
@@ -61,65 +68,26 @@ export const Home = () => {
           </h2>
           <p>Wishlists curated by Hotel Booking</p>
         </div>
-        <div className="on-form">
-          <Form onFinish={onFinish} className="form-search">
-            <Row
-              gutter={[16, 16]}
-              style={{
-                background: " #fff",
-                borderRadius: 10,
-                boxShadow: "0 2px 10px rgb(0 0 0 / 12%)",
-                paddingTop: 20,
-                width: "100%",
-              }}
-            >
-              <Col xs={24} sm={24} md={10} lg={10} xl={10}>
-                <Form.Item name="location">
-                  <Input placeholder="Location" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} sm={24} md={10} lg={10} xl={10}>
-                <Form.Item name="capacity">
-                  <Input placeholder="Capacity" type="number" min="1" />
-                </Form.Item>
-              </Col>
-              <Col
-                xs={24}
-                sm={24}
-                md={4}
-                lg={4}
-                xl={4}
-                style={{ display: "flex", justifyContent: "center" }}
-              >
-                <Form.Item className="search-btn">
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    shape="round"
-                    icon={<SearchOutlined />}
-                  ></Button>
-                </Form.Item>
-              </Col>
-            </Row>
-          </Form>
+        <div className="on-form btn-explore" onClick={exploreClick}>
+          Explore
         </div>
         {/* <img src={urlimg} alt='br' className="img-br"/> */}
       </div>
 
 
       <Divider orientation="left" plain>
-        <h1>Browse by location</h1>
+        <h3>Browse by location</h3>
       </Divider>
       <CarouselCus search={search} />
       
 
       <Divider orientation="left" plain>
-        <h1>Top Hotel</h1>
+        <h3>Top Hotel</h3>
       </Divider>
       <TopRating />
 
       <Divider orientation="left" plain>
-        <h1>Voucher</h1>
+        <h3>Voucher</h3>
       </Divider>
       <div>
         <a href="/voucher" className="view-more-blog">
@@ -132,7 +100,7 @@ export const Home = () => {
       />
 
       <Divider orientation="left" plain>
-        <h1>Get inspiration for your next trip</h1>
+        <h3>Get inspiration for your next trip</h3>
       </Divider>
       <a href="/blog" className="view-more-blog">
         View more

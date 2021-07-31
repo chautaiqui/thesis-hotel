@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Grid, Menu, Modal, Button } from 'antd';
-import { CloseCircleOutlined, CloseOutlined } from '@ant-design/icons';
+import { Row, Col, Grid, Modal, Button } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 import { SearchText } from './filter/search';
 import "./hotel.style.scss";
 import { SortPrice } from './filter/sort-price';
@@ -24,10 +24,11 @@ const clearProps = (obj, props) => {
   return temp;
 }
 export const Filter = (props) => {
-  const { changeQuery } = props;
+  const { changeQuery, location } = props;
+  
   const [ collapsed, setCollapsed ] = useState(false);
   const [ visible, setVisible ] = useState(false);
-  const [ query, setQuery ] = useState({});
+  const [ query, setQuery ] = useState(location);
   const screens = useBreakpoint();
   const breakP = breakPoint(screens);
 
@@ -63,8 +64,14 @@ export const Filter = (props) => {
     setQuery(clearProps(query,props));
   }
   useEffect(()=>{
-    console.log(query)
-    changeQuery(query);
+    if(Object.values(location).length > 0) setQuery(location);
+  },[location]);
+  useEffect(()=>{
+    // var t1 = clearProps(query, "page");
+    // var t2 = clearProps(t1, "pageSize");
+    // if(JSON.stringify(query) !== JSON.stringify(init))
+    console.log(query) 
+    return changeQuery(query);
   },[query])
   return !collapsed ? (
   <Row gutter={[16,16]}>

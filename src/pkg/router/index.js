@@ -51,7 +51,7 @@ const RouterContainer = (props) => {
     if (!check) {
       if (email && api_token) {
         // console.log("call check");
-        checkUser();
+        return checkUser();
       } else setCheck(true);
     }
     // eslint-disable-next-line

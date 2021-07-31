@@ -86,8 +86,10 @@ export const Headers = (props) => {
             )}
             {isLogin && (
               <Button
-                type="primary"
-                shape="round"
+                style={{
+                  backgroundColor: "#57ca8b",
+                  borderRadius: 5
+                }}
                 icon={<LogoutOutlined />}
                 className="btn-logout"
                 onClick={onLogout}
@@ -96,10 +98,14 @@ export const Headers = (props) => {
           </div>
         ) : (
           <Button
-            type="primary"
-            shape="round"
+            // type="primary"
+            // shape="round"
             icon={<MenuFoldOutlined />}
             onClick={handleClick}
+            style={{
+              backgroundColor: "#57ca8b",
+              borderRadius: 5
+            }}
           />
         )}
         <Drawer
@@ -111,7 +117,10 @@ export const Headers = (props) => {
           className="draw-menu"
         >
           {!isLogin && (
-            <NavLink exact to="/login" onClick={onClose}>
+            <NavLink 
+              exact to="/login" onClick={onClose} 
+              className="btn-log-out-mobile"
+            >
               Log in
             </NavLink>
           )}
@@ -138,8 +147,10 @@ export const Headers = (props) => {
           )}
           {isLogin && (
             <Button
-              type="primary"
-              shape="round"
+              style={{
+                backgroundColor: "#57ca8b",
+                borderRadius: 5
+              }}
               icon={<LogoutOutlined />}
               className="btn-logout btn-log-out-mobile"
               onClick={onLogout}

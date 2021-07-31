@@ -5,16 +5,17 @@ import { Row, Col, Card, Form, Input, Button, message } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { postMethod } from "../../pkg/api";
 import "./login.style.css";
+import { messageError, messageSuccess } from "../../commons";
 export const Login = () => {
   const [user, dispatchUser] = useContext(User.context);
   const history = useHistory();
   console.log(user);
 
   const onFinish = (values) => {
-    console.log(values);
     var format = /[A-Za-z0-9_]@[A-Za-z0-9_]+\.[A-Za-z0-9_]/;
     if (!format.test(values.email)) {
-      message.error("Email error format!");
+      // message.error("Email error format!");
+      messageError("Error", "Email invalid format!")
       return;
     }
     const fetchUser = async () => {
@@ -23,8 +24,9 @@ export const Login = () => {
         password: values.password,
       });
       if (res.success) {
-        message.success("Loading!");
-        console.log(res);
+        // message.success("Loading!");
+        messageSuccess("Log in", "Success")
+        // console.log(res);
         dispatchUser({
           type: "LOGIN",
           user: res.result.customer,
@@ -34,7 +36,8 @@ export const Login = () => {
         history.replace("/");
         window.location.reload();
       } else {
-        message.error(res.error);
+        // message.error(res.error);
+        messageError("Error", res.error)
         return;
       }
     };
@@ -51,7 +54,7 @@ export const Login = () => {
       >
         <Col style={{ lineHeight: "200px" }}></Col>
       </Row>
-      <Row gutter={[16, 16]} style={{ marginTop: 10 }}>
+      <Row gutter={[16, 16]} style={{ marginTop: 40 }}>
         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
           <Row>
             <Col span={12}>
@@ -128,7 +131,6 @@ export const Login = () => {
                   type="primary"
                   htmlType="submit"
                   className="login-form-button"
-                  shape="round"
                 >
                   Log in
                 </Button>

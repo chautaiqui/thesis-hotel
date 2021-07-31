@@ -1,9 +1,8 @@
-import { message, Select } from "antd";
-import React, { useState, useEffect, useReducer } from "react";
+import { Select } from "antd";
+import React, { useEffect, useReducer } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { getRequest } from "../../pkg/api";
-import { Row, Col, Pagination, Button, Form, Input, Empty } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { Row, Col, Pagination, Empty } from "antd";
 import { HotelItem } from "../../components/hotel-item";
 import "./hotel.style.scss";
 import { messageError } from "../../commons";
@@ -15,17 +14,20 @@ import { Filter } from "./filter";
 const { Option } = Select;
 
 const HotelReducer = (state, action) => {
+  // console.log(action)
   switch (action.type) {
 		case 'GET_DATA_SUCCESS':
-			return { ...state, data: action.data, query: action.query, total: action.total, behavior: 'stall' }
+			return { ...state, data: action.data, query: action.query, total: action.total, behavior: 'stall', location: {} }
 		case 'GET_DATA_ERROR':
-			return { ...state, data: [], behavior: 'stall' };
+			return { ...state, data: [], behavior: 'stall', location: {} };
 		case 'PAGINATION': 
-			return { ...state, query: action.query, total: action.total, behavior: 'init'}
+			return { ...state, query: action.query, total: action.total, behavior: 'init', location: {}}
 		case 'RELOAD':
 			return { ...state, behavior: 'init' };
     case 'QUERY':
-      return { ...state, behavior: 'init', query: action.query};
+      return { ...state, behavior: 'init', query: action.query, location: {}};
+    case 'LOCATION':
+      return { ...state, behavior: 'stall', location: action.location};
 		default:
 		return state;
   } 
@@ -33,12 +35,13 @@ const HotelReducer = (state, action) => {
 const initState = {
 	behavior: 'init',
 	data: [],
-	query: { page: 1, pageSize: 10},
-	total: undefined
+	query: {page: 1, pageSize: 10},
+	total: undefined,
+  location: {}
 }
 
-export const Hotel = () => {
-  var location = useLocation();
+export const Hotel = (props) => {
+  const location = useLocation();
   const history = useHistory();
   const [ state, dispatch ] = useReducer(HotelReducer, initState);
 
@@ -47,38 +50,50 @@ export const Hotel = () => {
       .slice(1)
       .split("&")
       .reduce(
-        (r, i) => Object.assign({}, r, { [i.split("=")[0]]: i.split("=")[1] }),
+        (r, i) => Object.assign({}, r, { [i.split("=")[0]]: decodeURIComponent(i.split("=")[1]) }),
         {}
       );
-      dispatch({
-        type: "PAGINATION", query: { ...param, ...state.query}, total: undefined
-      })
-  },[])
-  useEffect(() => {
-    const params = [];
-    for (const [key, value] of Object.entries(state.query)) {
-      if (state.query[key]) params.push(`${key}=${value}`);
-    }
-    history.push({
-      path: "hotel",
-      search: `?${params.join("&")}`,
-    });
-    console.log(params.join("&"))
-    const getHotel = async () => {
-      const res = await getRequest("hotel", state.query);
-      if (res.success) {
-        // setLstHotel({ behavior: "stall", data: res.result.hotels, total: res.totalPages});
+      console.log('param in hotel:', param)
+      if(param.searchText) {
         dispatch({
-          type: 'GET_DATA_SUCCESS', data: res.result.hotels, total: res.result.totalItems, 
-          query: {...state.query, page: res.result.currentPage, pageSize: res.result.pageSize}
+          type: "LOCATION", location: param
         })
-      } else {
-        messageError("Error", res.error);
       }
-    };
-    if(state.behavior === 'init') getHotel();
+  },[props]);
+  
+  const getHotel = async () => {
+    const res = await getRequest("hotel", state.query);
+    if (res.success) {
+      // setLstHotel({ behavior: "stall", data: res.result.hotels, total: res.totalPages});
+      dispatch({
+        type: 'GET_DATA_SUCCESS', data: res.result.hotels, total: res.result.totalItems, 
+        query: {...state.query, page: res.result.currentPage, pageSize: res.result.pageSize},
+      })
+      const params = [];
+      for (const [key, value] of Object.entries(state.query)) {
+        if (state.query[key]) params.push(`${key}=${value}`);
+      }
+      var t = "?" + params.join("&");
+
+      console.log(window.history, t)
+      // window.history.replaceState(null,"", t);
+      history.replace({
+        path: "hotel",
+        search: t,
+      });
+    } else {
+      messageError("Error", res.error);
+      return;
+    }
+    
+  }
+  useEffect(() => {
+    if(state.behavior === 'stall') return () => {};
+    if(state.behavior === 'init') {
+      return getHotel();
+    }
     // eslint-disable-next-line
-  }, [state]);
+  }, [state.query]);
 
   const hotelClick = (item) => {
     history.push(`/hotel/${item._id}`);
@@ -88,11 +103,12 @@ export const Hotel = () => {
       type: 'QUERY', query: query
     })
   }
+  console.log(state.query)
   return (
     <>
-      <Filter changeQuery={changeQuery}/>
+      <Filter changeQuery={changeQuery} location={state.location}/>
       <Row gutter={[16, 16]} style={{ marginTop: 50 }}>
-        {state.data.length !== 0 ? (
+        {(state.behavior !== 'init') ? (
           state.data.map((item, index) => {
             return (
               <Col xs={24} sm={24} md={12} lg={12} key={index}>

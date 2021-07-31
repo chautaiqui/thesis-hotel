@@ -1,9 +1,9 @@
-import React from 'react';
-import { Table, Tag, Row, Col, Button, Modal } from 'antd';
+import React, { useState } from 'react';
+import { Table, Tag, Row, Col, Button, Modal, Form, Rate, Input } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import './account.style.css';
-import { getRequest, putMethod } from '../../pkg/api';
+import { getRequest, postMethod, putMethod } from '../../pkg/api';
 import { messageError, messageSuccess } from '../../commons';
 const { confirm } = Modal;
 
@@ -36,6 +36,8 @@ const SumBooking = ({record}) => {
 
 export const TestTable = (props) => {
   const { data, rerender = () => {} } = props;
+  const [ state, setState ] = useState({visible: false, id: ""});
+  const [ form ] = Form.useForm();
   const cancelBooking = async (record) => {
     const res = await putMethod("booking", {} ,`${record._id}/cancel`);
     // console.log(res.result)
@@ -118,15 +120,86 @@ export const TestTable = (props) => {
         return action ? <Button className="btn-cancel-booking" onClick={()=>showConfirm(record)}>Cancel</Button> : <div></div>
       }
     },
+    {
+      title: 'Review',
+      key: 'review',
+      align: 'center',
+      render: record => {
+        return (!record.reviewed && record.isPaid) ? <Button className="btn-cancel-booking" onClick={()=>setState({visible: true, id: record._id})}>Review</Button> : <div></div>
+      }
+    },
 
   ];
-  return <Table 
-    columns={columns} 
-    dataSource={data} 
-    rowKey={"_id"}  
-    tableLayout="auto"
-    size="small"
-    pagination={false}
-    scroll={{ x: 992 }}
-  />
+  const reviews = async (data, id) => {
+    const res = await postMethod(`booking-review/booking/${id}`, data);
+    if (res.success) {
+      setState({visible:false, id: ""});
+      messageSuccess("Review Successfully!", "Thanks for reviewing booking!");
+    } else {
+      setState({visible:false, id: ""});
+      messageError("Error", res.error);
+    }
+    rerender();
+  }
+  const handleCancel = () => {
+    setState({visible: false});
+    form.resetFields();
+  }
+  const handleOk = (id) => {
+    if (state.id === "") return;
+    var data = form.getFieldsValue();
+    console.log(state.id, data)
+    reviews(data, state.id)
+  }
+  return <>
+    <Table 
+      columns={columns} 
+      dataSource={data} 
+      rowKey={"_id"}  
+      tableLayout="auto"
+      size="small"
+      pagination={false}
+      scroll={{ x: 992 }}
+    />
+    <Modal
+      centered
+      title="Review Booking"
+      visible={state.visible}
+      onOk={handleOk}
+      onCancel={handleCancel}
+      footer={
+        <div>
+          <Button className="btn-rating" onClick={handleCancel}>Cancel</Button>
+          <Button type="primary" className="btn-rating" onClick={handleOk}>Reviews</Button>
+        </div>
+      }
+    >
+      <Form form={form}>
+        <Form.Item 
+          label="Review"
+          name="review"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your review!',
+            },
+          ]}
+        >
+          <Input.TextArea/>
+        </Form.Item>
+        <Form.Item 
+          label="Rating"
+          name="rating"
+          rules={[
+            {
+              required: true,
+              message: 'Please rate your star!',
+            },
+          ]}
+        >
+          <Rate style={{color: '#a0d911'}}/>
+        </Form.Item>
+      </Form>
+    </Modal>
+  </>
 }

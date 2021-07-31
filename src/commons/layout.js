@@ -11,10 +11,10 @@ const MainLayout = (props) => {
   const [user] = useContext(User.context);
   return (
     <Layout style={{ background: "#fff" }}>
-      <div>
+      <div className="fixed-header">
         <Headers isLogin={user.email ? true : false} />
       </div>
-      <Content style={{ marginTop: 20 }}>
+      <Content style={{ marginTop: 50 }}>
         <Row gutter={[16, 16]}>
           <Col span={20} offset={2} style={{ background: "#fff" }}>
             {children}

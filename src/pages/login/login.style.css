@@ -7,3 +7,17 @@ h2 {
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
+.login-form-button {
+  border-radius: 10px !important;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 8px 30px;
+  letter-spacing: 1px;
+  transition: transform 80ms ease-in;
+  border: 1px solid #57ca8b !important;
+  background: #57ca8b !important;
+}
+.login-form-button:hover {
+  background: #13c2c2 !important;
+  color: #000 !important;
+}

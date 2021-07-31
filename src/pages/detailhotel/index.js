@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { Divider, message, Row, Col, Affix , Button} from "antd";
+import { message, Row, Col, Affix } from "antd";
 
 import { User } from "../../pkg/reducer";
 import { getRequest } from "../../pkg/api";
 import { HotelHeader } from "../../components/hotel-header";
-import { Booking } from "../../components/booking1";
-import HotelRating from "../../components/HotelRating";
-import ReviewRating from "../../components/ReviewRating";
+// import { Booking } from "../../components/booking1";
+// import HotelRating from "../../components/HotelRating";
+// import ReviewRating from "../../components/ReviewRating";
 import { CustomCollapse } from "./collapse";
 import "./detailhotel.style.css";
 import { ListRoom } from "./list-room";
@@ -36,6 +36,7 @@ export const DetailHotel = (props) => {
     endDate: undefined
   })
   useEffect(() => {
+    // console.log("-------", id)
     const fetchPost = async () => {
       const re = await getRequest("hotel", {}, [id]);
       if (!re.success) {

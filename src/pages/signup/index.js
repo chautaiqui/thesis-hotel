@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col, Card, Form, Input, DatePicker, Button, message } from "antd";
 import { useHistory } from "react-router-dom";
 import { postMethod } from "../../pkg/api";
+import { messageError, messageSuccess } from "../../commons";
 
 const formItemLayout = {
   labelCol: {
@@ -40,15 +41,15 @@ export const Signup = () => {
     const { address, birthday, password, email, name, phone } = values;
     var format = /[A-Za-z0-9_]@[A-Za-z0-9_]+\.[A-Za-z0-9_]/;
     if (!format.test(email)) {
-      message.error("Email error format!");
+      messageError("Error", "Email error format!");
       return;
     }
     if (password.length < 7) {
-      message.error("Password least 8 character!");
+      messageError("Error", "Password least 8 character!");
       return;
     }
     if (phone.length < 9 || phone.length > 11) {
-      message.error("Phone error!");
+      messageError("Error", "Invalid number phone");
       return;
     }
 
@@ -64,11 +65,12 @@ export const Signup = () => {
     const createUser = async () => {
       const res = await postMethod("customer/signup", data);
       if (res.success) {
-        message.success("Create account sucessfully!");
-        console.log(res);
+        // message.success("Create account sucessfully!");
+        messageSuccess("Succes", "Create account successfully!");
+        // console.log(res);
         history.push("/login");
       } else {
-        message.error(res.error);
+        messageError('Error', res.error)
         return;
       }
     };
@@ -76,7 +78,7 @@ export const Signup = () => {
   };
   return (
     <div>
-      <Row gutter={[16, 16]} style={{ marginTop: 10 }}>
+      <Row gutter={[16, 16]} style={{ marginTop: 40 }}>
         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
           <Row gutter={[16, 16]}>
             <Col span={12}>
@@ -221,17 +223,17 @@ export const Signup = () => {
                   }}
                 />
               </Form.Item>
-              <Form.Item>
+              <Form.Item wrapperCol={{offset: 10}}>
                 You have a account?{" "}
                 <a href="/login">
                   <mark>Click here</mark>
                 </a>
               </Form.Item>
-              <Form.Item {...tailFormItemLayout}>
+              <Form.Item wrapperCol={{offset: 10}}>
                 <Button
-                  style={{ borderRadius: "15px" }}
                   type="primary"
                   htmlType="submit"
+                  className="login-form-button"
                 >
                   Register
                 </Button>
