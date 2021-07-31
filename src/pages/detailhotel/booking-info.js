@@ -81,7 +81,7 @@ export const BookingInfo = (props) => {
     }
     if(discount) {
       data = {
-        ...data, voucher: discount.id, totalMoney: discount.price
+        ...data, voucher: discount.id, totalMoney: price - discount.price
       }
     }
     console.log(data);

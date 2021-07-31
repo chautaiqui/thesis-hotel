@@ -59,3 +59,14 @@
   bottom: 0;
   margin: auto;
 }
+.InfiniteCarouselArrowIcon {
+  border: solid #57ca8b !important;
+  border-width: 0 5px 5px 0 !important;
+}
+.fixed-header {
+  position: fixed;
+  width: 100%;
+  background: #fafafa;
+  height: 50px;
+  z-index: 1000;
+}

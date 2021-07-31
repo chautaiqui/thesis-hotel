@@ -51,3 +51,11 @@
   font-weight: 600;
   color: #081d8d !important;
 }
+.btn-explore {
+  color: #fff;
+  font-size: x-large;
+  cursor: pointer;
+  padding: 20px 27px 20px;
+  border-radius: 10px;
+  background: #57ca8b;
+}
