@@ -120,8 +120,15 @@ export const Filter = (props) => {
       ></Button>
     </Col>}
     <Col span={4}>
-      <MoreFilter />
+      <MoreFilter appendQuery={appendQuery} clearQuery={clearQuery} query={query}/>
     </Col>
+    {query.conveniences && <Col span={1} className="btn-close-center">
+      <Button
+        onClick={()=>setQuery(clearProps(query, "conveniences"))}
+        shape="circle"
+        icon={<CloseOutlined />}
+      ></Button>
+    </Col>}
     <Col span={24}>
       <SearchText appendQuery={appendQuery} clearQuery={clearQuery} query={query}/>
     </Col>
