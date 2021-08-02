@@ -10,8 +10,8 @@ export const BookingReviews = (props) => {
       <h4>Review by customer is booked</h4>
     </Col>
     {
-      reviews.map(item => {
-        return <Col xs={24} sm={24} md={24}>
+      reviews.map((item, index) => {
+        return <Col xs={24} sm={24} md={24} key={index}>
           <RatingItem rate={
             {
               comment: item.review, 

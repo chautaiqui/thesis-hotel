@@ -1,54 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Dropdown, Button } from 'rsuite';
-import { Checkbox, Row, Col } from 'antd';
-
-export const MoreFilter = (props) => {
-  const { appendQuery = () => {}, clearQuery = () => {}, query = {}} = props;
-  const [ value, setValue ] = useState([]);
-  const [ cur, setCur ] = useState("btn-filter");
-
-  useEffect(()=>{
-    if(query.conveniences) {
-      setCur("btn-filter have-query");
-      setValue(query.conveniences.split(","));
-    }
-    else {
-      setCur("btn-filter");
-    }
-  },[props]);
-
-  const onChange = (values) => {
-    setValue(values);
-  }
-  const onApply = () => {
-    appendQuery({
-      conveniences: value.join(',')
-    })
-  }
-  return <Dropdown
-    title={<div style={{width: "100%"}}> More Filter</div>}
-    style={{width: "100%"}}
-    className="filter-dropdown"
-    renderTitle={children => {
-      return <Button className={cur}>{children}</Button>;
-    }}
-  >
-    <div style={{width: 300, padding: "10px 10px 10px 10px"}} >
-      <Checkbox.Group onChange={onChange}>
-        <Row>
-          {
-            moreCon.map((item, index)=> {
-              return <Col xs={24} sm={12} key={index}>
-                <Checkbox value={item.value}>{item.label}</Checkbox>
-              </Col>
-            })
-          }
-        </Row>
-      </Checkbox.Group>
-      <Button appearance="primary" style={{float: "right"}} onClick={onApply}>Apply</Button>
-    </div>
-  </Dropdown>
-}
+import React from 'react';
+import { Row, Col } from 'antd';
 
 const moreCon = [
   {
@@ -97,3 +48,26 @@ const moreCon = [
     img: "https://ads-cdn.fptplay.net/static/banner/2021/08/03_61082b955140f7000116c898.png"
   }
 ]
+
+export const Conveniences = (props) => {
+  const { data } = props;
+  const fdata = data.map(item => {
+    var t = moreCon.find(i=> i.value === item);
+    return t
+  })
+  console.log(fdata)
+  return <>
+  <h4>Conveniences</h4>
+  <Row gutter={[16,16]}>
+    {
+      fdata.map((item, index) => {
+        return <Col xs={24} sm={12} key={index} style={{display: "flex",
+          alignItems: "center"}}>
+          <img src={item.img} alt="" style={{maxWidth: 40}}/>
+          <span style={{marginLeft: 25}}>{item.value}</span>
+        </Col>
+      })
+    }
+  </Row>
+  </>
+}

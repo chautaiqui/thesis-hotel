@@ -17,7 +17,7 @@ import moment from "moment";
 import { BookingInfo } from "./booking-info";
 import { CustomEmpty } from "../../commons/components/empty";
 import { BookingReviews } from "./booking-reviews";
-
+import { Conveniences } from "./conveniences";
 export const DetailHotel = (props) => {
   const [ user, dispatch ] = useContext(User.context);
   const { id } = useParams();
@@ -156,6 +156,9 @@ export const DetailHotel = (props) => {
               <h4>Description</h4>
               {
                 hotel.description && <CustomCollapse text={hotel.description} position={20}/>
+              }
+              {
+                hotel.conveniences.length !== 0 && <Conveniences data={hotel.conveniences}/>
               }
               <div>
                 <h4>Select Room</h4>
