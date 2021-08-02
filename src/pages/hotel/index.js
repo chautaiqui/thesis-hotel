@@ -105,8 +105,8 @@ export const Hotel = (props) => {
   }
   console.log(state.query)
   return (
-    <>
-      <Filter changeQuery={changeQuery} location={state.location}/>
+    <div style={{marginTop: 30}}>
+      <Filter changeQuery={changeQuery} location={state.location} />
       <Row gutter={[16, 16]} style={{ marginTop: 50 }}>
         {(state.behavior !== 'init') ? (
           state.data.map((item, index) => {
@@ -160,6 +160,6 @@ export const Hotel = (props) => {
         }}
         style={{display: 'flex',justifyContent: 'center',marginTop: 50}}
       />
-    </>
+    </div>
   );
 };

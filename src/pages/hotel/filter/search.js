@@ -24,8 +24,7 @@ export const SearchText = (props) => {
     </Form.Item>
     <Form.Item>
       <Button
-        type='primary'
-        htmlType="submit"
+        className="btn-update"
         style={{
           borderRadius: 6
         }}

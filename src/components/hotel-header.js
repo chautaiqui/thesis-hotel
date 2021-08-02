@@ -222,7 +222,7 @@ export const HotelHeader = ({ hotel, user, update = () => {} }) => {
                 <Rate style={{color: '#a0d911'}}/>
               </Form.Item>
               <Form.Item>
-                <Button type="primary" htmlType="submit" className="btn-rating">
+                <Button type="primary" htmlType="submit" className="btn-update">
                   Rate
                 </Button>
               </Form.Item>
