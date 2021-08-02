@@ -70,3 +70,7 @@
   height: 50px;
   z-index: 1000;
 }
+.ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner, .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner, .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+  color: #fff !important;
+  background: #57ca8b !important;
+}

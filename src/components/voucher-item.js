@@ -35,8 +35,10 @@ export const VoucherItem = (props) => {
           {!view && <Col span={24} style={{marginBottom: 10}}>
             <Button
               onClick={() => getVoucher(voucher)}
-              type="primary"
-              shape="round"
+              style={{
+                backgroundColor: "#57ca8b",
+                borderRadius: 5
+              }}
               className="btn-update"
               icon={<WalletOutlined />}
             >

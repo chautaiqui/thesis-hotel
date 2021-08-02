@@ -46,7 +46,7 @@ const RoomItem = props => {
     { room._id && <Col span={4} onClick={selectRoom}>
       <div
         className="slide"
-        style={{background: selected ? "#69c0ff" : "#f0f0f0"}}
+        style={{background: selected ? "#57ca8b" : "#f0f0f0"}}
       >Select</div>
     </Col>}
   </Row>

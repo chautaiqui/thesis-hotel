@@ -47,6 +47,9 @@ export const Password = () => {
   return<>
     <Form
       form={form}
+      style={{
+        marginTop: 50
+      }}
       name="normal_account"
       className="account-form"
       labelCol={{ span: 6 }}

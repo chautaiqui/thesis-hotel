@@ -21,7 +21,8 @@
 }
 .show-collapse {
   cursor: pointer;
-  color: #141414;
+  color: #096dd9;
+  font-weight: 700;
 }
 h4.ant-typography, .ant-typography h4 {
   text-align: center;
@@ -39,7 +40,7 @@ h4.ant-typography, .ant-typography h4 {
 }
 .btn-booking {
   padding: 15px;
-  background: #40a9ff;
+  background: #57ca8b;
   border-radius: 10px;
   text-align: center;
   cursor: pointer;
