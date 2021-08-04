@@ -141,7 +141,10 @@ export const Filter = (props) => {
       visible={visible}
       footer={
         <div>
-					<Button className="btn-apple" appearance='primary' onClick={()=>{
+          <Button className="btn-apple" appearance='primary' onClick={()=>{
+						console.log('click');
+					}}>Clear</Button>
+          <Button className="btn-apple btn-update" appearance='primary' onClick={()=>{
 						console.log('click');
 					}}>Apply</Button>
 				</div>

@@ -25,12 +25,12 @@ export const BlogItem = (props) => {
       responsive={{
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 4,
+          items: 3,
           paritialVisibilityGutter: 30,
         },
         small: {
-          breakpoint: { max: 1800, min: 1024 },
-          items: 3,
+          breakpoint: { max: 1024, min: 465 },
+          items: 2,
         },
         tablet: {
           breakpoint: { max: 1024, min: 464 },

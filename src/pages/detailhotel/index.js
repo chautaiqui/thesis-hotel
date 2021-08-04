@@ -23,6 +23,9 @@ export const DetailHotel = (props) => {
   const { id } = useParams();
   const [hotel, setHotel] = useState({});
   // const [room, setRoom] = useState([]);
+  const affixRef = React.createRef();
+  const [container, setContainer] = useState(null);
+
   const [ data, setData ] = useState({
     room: [],
     reviews: [],
@@ -52,6 +55,15 @@ export const DetailHotel = (props) => {
     // eslint-disable-next-line
   }, [id, updateHotel]);
 
+  // useEffect(()=>{
+  //   window.addEventListener(
+  //     "scroll",
+  //     () => {
+  //       if(affixRef.current) affixRef.current.updatePosition();
+  //     },
+  //     true
+  //   );
+  // }, [props])
 
   useEffect(() => {
     const fetchRoom = async () => {
@@ -145,14 +157,15 @@ export const DetailHotel = (props) => {
   //   var r = flattenBookingDate(selected.room.bookings);
   //   console.log(r)
   // }
-  console.log(selected)
+  console.log(container)
   return (
     <>
       {!data.loading ? (
         <div>
           <HotelHeader hotel={hotel} user={user._id ? {login: true, _id: user._id} : {login: false, _id: ""}} update={actionChangeHotel}/>
-          <Row gutter={[16,16]} style={{marginTop: 20}} >
-            <Col span={16}>
+          <Row gutter={[16,16]} style={{marginTop: 20}} 
+          >
+            <Col xs={24} sm={16}>
               <h4>Description</h4>
               {
                 hotel.description && <CustomCollapse text={hotel.description} position={20}/>
@@ -196,6 +209,28 @@ export const DetailHotel = (props) => {
                   </Col>
                 </Row>
               </div>
+            </Col>
+            <Col xs={24} sm={8} style={{position: 'relative'}} 
+              ref={setContainer}
+              style={{
+                overflowY: "scroll"
+              }}
+            >
+              <Affix offsetTop={10}>
+                <div style={{
+                  width: "100%",
+                  padding: 5,
+                  border: "1px solid #DDDDDD",
+                  boxShadow: "0px 6px 16px rgb(0 0 0 / 12%)",
+                  borderRadius: 10
+                }}>
+                  <BookingInfo data={selected} hotel={hotel} user={user} dispatch={dispatch} clearBooking={clearBooking}/>
+                </div>
+              </Affix>
+            </Col>
+          </Row>
+          <Row gutter={[16,16]}>
+            <Col xs={24} sm={16}>
               <h4>Where you’ll be</h4>
               <div style={{ marginTop: 20 }}>
                 <div className="detail-decr">
@@ -219,21 +254,7 @@ export const DetailHotel = (props) => {
               {/* <BookingReivews /> */}
               <BookingReviews reviews={data.reviews}/>
             </Col>
-            <Col span={8} style={{position: 'relative'}}>
-              <Affix offsetTop={10}>
-                <div style={{
-                  width: "100%",
-                  padding: 5,
-                  border: "1px solid #DDDDDD",
-                  boxShadow: "0px 6px 16px rgb(0 0 0 / 12%)",
-                  borderRadius: 10
-                }}>
-                  <BookingInfo data={selected} hotel={hotel} user={user} dispatch={dispatch} clearBooking={clearBooking}/>
-                </div>
-              </Affix>
-            </Col>
           </Row>
-          
           {/* <Booking hotel={hotel} room={room} />
           <Divider>Review</Divider>
 
