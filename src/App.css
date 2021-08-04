@@ -74,3 +74,10 @@
   color: #fff !important;
   background: #57ca8b !important;
 }
+.ant-divider-inner-text { 
+  max-width: 100%;
+}
+.ant-divider-inner-text > h3 { 
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

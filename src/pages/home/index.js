@@ -10,6 +10,7 @@ import { getRequest } from "../../pkg/api";
 import { VoucherList } from "../voucher";
 import TopRating from "../../components/TopRating";
 import { CustomEmpty } from "../../commons/components/empty";
+import { Background } from "./background";
 
 export const Home = () => {
   const history = useHistory();
@@ -60,7 +61,7 @@ export const Home = () => {
       <Divider orientation="left" plain>
         <h3>Where will you travel next?</h3>
       </Divider>
-      <div className="br-homepage">
+      {/* <div className="br-homepage">
         <div className="content">
           <h2 className="outdoors">
             The greatest <br />
@@ -71,9 +72,8 @@ export const Home = () => {
         <div className="on-form btn-explore" onClick={exploreClick}>
           Explore
         </div>
-        {/* <img src={urlimg} alt='br' className="img-br"/> */}
-      </div>
-
+      </div> */}
+      <Background />
 
       <Divider orientation="left" plain>
         <h3>Browse by location</h3>

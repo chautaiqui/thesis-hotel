@@ -62,11 +62,11 @@ export const BlogItem = () => {
           )}
         />
         <Row gutter={[16,16]}>
-          <Col span={18}>
+          <Col xs={24} sm={24} md={18}>
             <img className="img-post" src={post.img} alt="img-post" />
             <p className="content-blog">{post.content}</p>
           </Col>
-          <Col span={6}>
+          <Col xs={24} sm={24} md={6}>
             <p
               style={{
                 fontSize: "15px",

@@ -34,10 +34,10 @@ export const ListRoom = (props) => {
 const RoomItem = props => {
   const { room, selectRoom = () => {}, style = {}, selected = false } = props;
   return <Row style={style}>
-    <Col span={5} style={{textAlign: 'center'}}>{room.name}</Col>
-    <Col span={5} style={{textAlign: 'center'}}>{room.roomType.name}</Col>
-    <Col span={2} style={{textAlign: 'center'}}>{room.roomType.capacity}</Col>
-    <Col span={8} style={{textAlign: 'center'}}>
+    <Col span={5} style={{textAlign: 'center', overflow: "hidden",textOverflow: "ellipsis"}}>{room.name}</Col>
+    <Col span={5} style={{textAlign: 'center', overflow: "hidden",textOverflow: "ellipsis"}}>{room.roomType.name}</Col>
+    <Col span={2} style={{textAlign: 'center', overflow: "hidden",textOverflow: "ellipsis"}}>{room.roomType.capacity}</Col>
+    <Col span={8} style={{textAlign: 'center', overflow: "hidden",textOverflow: "ellipsis"}}>
       {room.roomType.price.toLocaleString("it-IT", {
         style: "currency",
         currency: "VND",
@@ -46,7 +46,7 @@ const RoomItem = props => {
     { room._id && <Col span={4} onClick={selectRoom}>
       <div
         className="slide"
-        style={{background: selected ? "#57ca8b" : "#f0f0f0"}}
+        style={{background: selected ? "#57ca8b" : "#f0f0f0", overflow: "hidden",textOverflow: "ellipsis"}}
       >Select</div>
     </Col>}
   </Row>
