@@ -110,11 +110,11 @@ export const CarouselCus = (props) => {
                 style={{
                   // padding: "0 0 0 60px",
                   // fontSize: "15px",
-                  fontWeight: 500,
+                  fontWeight: 800,
                   textAlign: "center",
                 }}
               >
-                {item.name}
+                {item.search}
               </p>
             </div>
           );

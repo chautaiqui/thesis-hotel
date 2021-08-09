@@ -216,7 +216,7 @@ export const DetailHotel = (props) => {
                 overflowY: "scroll"
               }}
             >
-              <Affix offsetTop={10}>
+              <Affix offsetTop={10} style={{ position: 'absolute', top: 0, left: 0 }}>
                 <div style={{
                   width: "100%",
                   padding: 5,

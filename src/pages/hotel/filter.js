@@ -134,7 +134,15 @@ export const Filter = (props) => {
     </Col>
   </Row>
   ) : (<>
-    <Button onClick={()=>setVisible(true)}>More filters</Button>
+    <Row gutter={[16,16]}>
+      <Col span={24}>
+        <SearchText appendQuery={appendQuery} clearQuery={clearQuery} query={query}/>
+      </Col>
+      <Col span={24}>
+        <Button onClick={()=>setVisible(true)}>More filters</Button>
+      </Col>
+    </Row>
+    
     <Modal 
       title="More filters" 
       centered
@@ -142,18 +150,69 @@ export const Filter = (props) => {
       footer={
         <div>
           <Button className="btn-apple" appearance='primary' onClick={()=>{
-						console.log('click');
+						setQuery({});
+            setVisible(false);
 					}}>Clear</Button>
           <Button className="btn-apple btn-update" appearance='primary' onClick={()=>{
-						console.log('click');
-					}}>Apply</Button>
+            setVisible(false);
+					}}>Close</Button>
 				</div>
       }
       onOk={()=>{}}
       onCancel={()=>setVisible(false)}
     >
-      Filter
+      <Row gutter={[16,16]}>
+        <Col span={20}>
+          <SortPrice appendQuery={appendQuery} clearQuery={clearQuery} query={query}/>  
+        </Col>
+        {query.averagePrice && <Col span={4} className="btn-close-center">
+          <Button
+            onClick={()=>setQuery(clearProps(query, "averagePrice"))}
+            shape="circle"
+            icon={<CloseOutlined />}
+          ></Button>
+        </Col>}
+        <Col span={20}>
+          <Rating appendQuery={appendQuery} clearQuery={clearQuery} query={query}/>
+        </Col>
+        {query.rating && <Col span={4} className="btn-close-center">
+          <Button
+            onClick={()=>setQuery(clearProps(query, "rating"))}
+            shape="circle"
+            icon={<CloseOutlined />}
+          ></Button>
+        </Col>}
+        <Col span={20}>
+          <Capacity appendQuery={appendQuery} clearQuery={clearQuery} query={query}/>
+        </Col>
+        {query.capacity && <Col span={4} className="btn-close-center">
+          <Button
+            onClick={()=>setQuery(clearProps(query, "capacity"))}
+            shape="circle"
+            icon={<CloseOutlined />}
+          ></Button>
+        </Col>}
+        <Col span={20}>
+          <MoreFilter appendQuery={appendQuery} clearQuery={clearQuery} query={query}/>
+        </Col>
+        {query.conveniences && <Col span={4} className="btn-close-center">
+          <Button
+            onClick={()=>setQuery(clearProps(query, "conveniences"))}
+            shape="circle"
+            icon={<CloseOutlined />}
+          ></Button>
+        </Col>}
+        {/* <Col span={24}>
+          <SearchText appendQuery={appendQuery} clearQuery={clearQuery} query={query} key={1}/>
+        </Col> */}
+      </Row>
     </Modal>
   </>)
 }
 
+// const appendQuery = (obj) => {
+//   setQuery({...query,...obj});
+// }
+// const clearQuery = (props) => {
+//   setQuery(clearProps(query,props));
+// }

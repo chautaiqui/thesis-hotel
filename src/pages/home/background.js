@@ -28,7 +28,7 @@ const Pc = (props) => {
       </h2> <br />
       <div>Wishlists curated by Hotel Booking</div>
       <div style={{marginTop: "5%"}}>
-        <div class="btn-explore" onClick={()=>window.location.href = "/hotel"}>Explore</div>
+        <div className="btn-explore" onClick={()=>window.location.href = "/hotel"}>Explore</div>
       </div>
     </div> 
   </div>
@@ -44,7 +44,7 @@ const Mobile = (props) => {
       </h2> <br />
       <div>Wishlists curated by Hotel Booking</div>
       <div style={{marginTop: "5%"}}>
-        <div class="btn-explore" onClick={()=>window.location.href = "/hotel"}>Explore</div>
+        <div className="btn-explore" onClick={()=>window.location.href = "/hotel"}>Explore</div>
       </div>
     </div> 
   </div>
